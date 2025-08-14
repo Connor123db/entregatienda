@@ -1,0 +1,167 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1A88E2; /* Fondo azul igual a los campos */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.login-container {
+    width: 400px;
+    margin: 100px auto;
+    padding: 40px 30px;
+    background: #FFF94D; /* Amarillo para contraste */
+    border-radius: 16px;
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.25);
+    position: relative;
+    text-align: center;
+}
+
+.login-container h2 {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+.login-container label {
+    display: block;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    height: 50px;
+    background: #1A88E2;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 18px;
+    padding: 0 15px;
+    margin-bottom: 20px;
+}
+
+.login-container button {
+    width: 100%;
+    height: 50px;
+    background: #36320A;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 23px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.login-container button:hover {
+    background: #1A88E2;
+}
+.galeria-vehiculos {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.vehiculo {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+}
+
+.vehiculo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+}
+
+.info-vehiculo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #FFF94D;
+    color: #000000;
+    padding: 15px 10px 10px 10px;
+    border-radius: 0 0 20px 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 16px;
+    pointer-events: none;
+}
+
+.vehiculo:hover .info-vehiculo {
+    opacity: 1;
+}
+
+.vehiculo:hover {
+    transform: scale(1.04);
+}
+
+
+.barra-superior {
+    width: 100%;
+    height: 60px;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0 40px;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.barra-superior .empresa {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.barra-superior .usuario {
+    font-size: 18px;
+    font-weight: 500;
+    color: #ccc;
+}
+
+body {
+    padding-top: 60px; /* Para que el contenido no quede debajo de la barra */
+}
+footer {
+    width: 100%;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+}
+.paginacion {
+    margin-bottom: 80px;
+}
