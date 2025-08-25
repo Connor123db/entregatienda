@@ -1,19 +1,28 @@
+/* =================== ESTILOS GENERALES =================== */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1A88E2; /* Fondo azul igual a los campos */
+    background-color: #1A88E2; /* Fondo azul */
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
+/* =================== LOGIN =================== */
+body.login-page {
+    /*Aplica solo en login.html si agregamos la clase login-page en <body> */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 0; /* anula padding de la barra superior */
+}
+
 .login-container {
     width: 400px;
-    margin: 100px auto;
     padding: 40px 30px;
-    background: #FFF94D; /* Amarillo para contraste */
+    background: #FFF94D; /* Amarillo */
     border-radius: 16px;
     box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.25);
-    position: relative;
     text-align: center;
 }
 
@@ -23,16 +32,6 @@ body {
     font-size: 32px;
     color: #000;
     margin-bottom: 30px;
-}
-
-.login-container label {
-    display: block;
-    font-family: 'Poppins', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    color: rgba(0, 0, 0, 0.6);
-    margin-bottom: 8px;
-    text-align: left;
 }
 
 .login-container input[type="text"],
@@ -67,6 +66,53 @@ body {
 .login-container button:hover {
     background: #1A88E2;
 }
+
+/* =================== RESPONSIVE LOGIN =================== */
+@media screen and (max-width: 1024px) {
+    body.login-page {
+        padding: 20px;
+    }
+
+    .login-container {
+        width: 70%;
+        padding: 30px 20px;
+    }
+
+    .login-container h2 {
+        font-size: 28px;
+    }
+
+    .login-container input,
+    .login-container button {
+        font-size: 18px;
+        height: 48px;
+    }
+}
+
+@media screen and (max-width: 568px) {
+    .login-container {
+        width: 90%;
+        padding: 25px 15px;
+    }
+
+    .login-container h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .login-container input,
+    .login-container button {
+        font-size: 16px;
+        height: 44px;
+    }
+
+    .login-container button {
+        border-radius: 20px;
+        font-size: 18px;
+    }
+}
+
+/* =================== PRODUCTOS=================== */
 .galeria-vehiculos {
     display: flex;
     justify-content: center;
@@ -120,7 +166,6 @@ body {
     transform: scale(1.04);
 }
 
-
 .barra-superior {
     width: 100%;
     height: 60px;
@@ -151,8 +196,9 @@ body {
 }
 
 body {
-    padding-top: 60px; /* Para que el contenido no quede debajo de la barra */
+    padding-top: 60px; /* Para que productos no quede debajo de la barra */
 }
+
 footer {
     width: 100%;
     background: #111;
@@ -164,6 +210,7 @@ footer {
     left: 0;
     z-index: 99;
 }
+
 .paginacion {
     margin-bottom: 80px;
 }
@@ -174,6 +221,11 @@ footer {
     border: none;
     border-radius: 8px;
     padding: 10px 24px;
+    font-size: 16px;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
     font-size: 16px;
     margin: 0 8px;
     cursor: pointer;
