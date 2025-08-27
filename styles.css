@@ -227,3 +227,58 @@ footer {
     cursor: pointer;
     transition: background 0.2s;
 }
+
+/* =================== RESPONSIVE PRODUCTOS =================== */
+
+/* --- Estilos para tabletas (entre 601px y 1024px) --- */
+@media (max-width: 1024px) {
+    .galeria-vehiculos {
+        gap: 20px; /* Reduce el espacio entre elementos */
+        justify-content: space-around; /* Distribuye los vehículos equitativamente */
+    }
+
+    .vehiculo {
+        width: 45%; /* Cada vehículo ocupa casi la mitad del ancho para mostrar dos por fila */
+        height: 200px; /* Aumenta un poco la altura para mejor visualización */
+    }
+    
+    .barra-superior {
+        padding: 0 30px; /* Reduce el relleno lateral */
+    }
+}
+
+/* Estilos para pantallas hasta 568px */
+@media (max-width: 568px) {
+    .galeria-vehiculos {
+        flex-direction: column; /* Apila los vehículos en una columna */
+        align-items: center; /* Centra los vehículos en el contenedor */
+    }
+
+    .vehiculo {
+        width: 100%; /* Cada vehículo ocupa el 100% del ancho del contenedor */
+        max-width: 300px; /* Un ancho máximo para que no se vean gigantes en tablets */
+        height: 200px; /* Ajusta la altura para móviles */
+    }
+
+    .info-vehiculo {
+        opacity: 1; /* Hace que la información sea visible siempre, sin necesidad de 'hover' */
+        position: static; /* Quita el posicionamiento absoluto para que el texto ocupe espacio */
+        border-radius: 0; /* Remueve los bordes redondeados */
+    }
+    
+    .vehiculo:hover {
+        transform: none; /* Deshabilita el efecto de "zoom" al pasar el mouse */
+    }
+
+    .barra-superior {
+        padding: 0 20px; /* Reduce el relleno en los lados de la barra superior */
+    }
+
+    .barra-superior .empresa {
+        font-size: 18px; /* Reduce el tamaño de la fuente del nombre de la empresa */
+    }
+
+    .barra-superior .usuario {
+        font-size: 14px; /* Reduce el tamaño de la fuente del nombre del usuario */
+        text-align: right;
+    }
