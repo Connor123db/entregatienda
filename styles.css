@@ -92,24 +92,24 @@ body.login-page {
 
 @media screen and (max-width: 568px) {
     .login-container {
-        width: 90%;
-        padding: 25px 15px;
+        width: 90%; /*hace que el login ocupe casi el 100% de la pantalla*/
+        padding: 25px 15px; /*menos padding para aprovechar el espacio*/
     }
 
     .login-container h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
+        font-size: 24px; /*tamaño de la fuente del titulo*/
+        margin-bottom: 20px; /*reduce el espacio debajo del titulo*/
     }
 
     .login-container input,
     .login-container button {
-        font-size: 16px;
-        height: 44px;
+        font-size: 16px; /*tamaño de la letra en el boton y en el input*/
+        height: 44px; /*input y botones mas compactos, altura vertical*/
     }
 
     .login-container button {
-        border-radius: 20px;
-        font-size: 18px;
+        border-radius: 20px; /*redondea el borde del boton*/
+        font-size: 18px; /*tamaño de la letra del boton*/
     }
 }
 
