@@ -230,7 +230,7 @@ footer {
 
 /* =================== RESPONSIVE PRODUCTOS =================== */
 
-/* --- Estilos para tabletas (entre 601px y 1024px) --- */
+/* --- Estilos para tabletas (entre 568px y 1024px) --- */
 @media (max-width: 1024px) {
     .galeria-vehiculos {
         gap: 20px; /* Reduce el espacio entre elementos */
