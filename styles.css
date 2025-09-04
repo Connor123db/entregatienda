@@ -145,7 +145,11 @@ body.login-page {
     bottom: 0;
     left: 0;
     right: 0;
+<<<<<<< HEAD
     background: hsl(58, 100%, 65%);
+=======
+    background: #FFF94D;
+>>>>>>> 561c7d9d129e7068eea3e9dc131d6619447151d2
     color: #000000;
     padding: 18px 14px 14px 14px; 
     border-radius: 0 0 20px 20px;
@@ -283,6 +287,7 @@ footer {
         text-align: right;
     }
 }
+<<<<<<< HEAD
 .boton {
     background: #fff94d;
     color: #000000;
@@ -312,3 +317,5 @@ footer {
     flex-wrap: wrap;
     margin: 20px 0;
 }
+=======
+>>>>>>> 561c7d9d129e7068eea3e9dc131d6619447151d2
