@@ -1,0 +1,314 @@
+
+/* =================== ESTILOS GENERALES =================== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1A88E2; /* Fondo azul */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* =================== LOGIN =================== */
+body.login-page {
+    /*Aplica solo en login.html si agregamos la clase login-page en <body> */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 0; /* anula padding de la barra superior */
+}
+
+.login-container {
+    width: 400px;
+    padding: 40px 30px;
+    background: #FFF94D; /* Amarillo */
+    border-radius: 16px;
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.login-container h2 {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 90%;
+    height: 50px;
+    background: #1A88E2;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 18px;
+    padding: 0 15px;
+    margin-bottom: 20px;
+}
+
+.login-container button {
+    width: 100%;
+    height: 50px;
+    background: #36320A;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 23px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.login-container button:hover {
+    background: #1A88E2;
+}
+
+/* =================== RESPONSIVE LOGIN =================== */
+@media screen and (max-width: 1024px) {
+    body.login-page {
+        padding: 20px;
+    }
+
+    .login-container {
+        width: 70%;
+        padding: 30px 20px;
+    }
+
+    .login-container h2 {
+        font-size: 28px;
+    }
+
+    .login-container input,
+    .login-container button {
+        font-size: 18px;
+        height: 48px;
+    }
+}
+
+@media screen and (max-width: 568px) {
+    .login-container {
+        width: 90%; /*hace que el login ocupe casi el 100% de la pantalla*/
+        padding: 25px 15px; /*menos padding para aprovechar el espacio*/
+    }
+
+    .login-container h2 {
+        font-size: 24px; /*tamaño de la fuente del titulo*/
+        margin-bottom: 20px; /*reduce el espacio debajo del titulo*/
+    }
+
+    .login-container input,
+    .login-container button {
+        font-size: 16px; /*tamaño de la letra en el boton y en el input*/
+        height: 44px; /*input y botones mas compactos, altura vertical*/
+    }
+
+    .login-container button {
+        border-radius: 20px; /*redondea el borde del boton*/
+        font-size: 18px; /*tamaño de la letra del boton*/
+    }
+}
+
+/* =================== PRODUCTOS=================== */
+.galeria-vehiculos {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.vehiculo {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+}
+
+.vehiculo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+}
+
+.info-vehiculo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: hsl(58, 100%, 65%);
+    color: #000000;
+    padding: 18px 14px 14px 14px; 
+    border-radius: 0 0 20px 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 16px;
+    pointer-events: none;
+    box-sizing: border-box; 
+    min-height: 48px; 
+    word-break: break-word; 
+}
+
+.vehiculo:hover .info-vehiculo {
+    opacity: 1;
+}
+
+.vehiculo:hover {
+    transform: scale(1.04);
+}
+
+.barra-superior {
+    width: 100%;
+    height: 60px;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0 40px;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.barra-superior .empresa {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.barra-superior .usuario {
+    font-size: 18px;
+    font-weight: 500;
+    color: #ccc;
+}
+
+body {
+    padding-top: 60px; /* Para que productos no quede debajo de la barra */
+}
+
+footer {
+    width: 100%;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+}
+
+.paginacion {
+    margin-bottom: 80px;
+}
+
+.paginacion button {
+    background: #FFF94D;
+    color: #111;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 16px;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* =================== RESPONSIVE PRODUCTOS =================== */
+
+/* --- Estilos para tabletas (entre 568px y 1024px) --- */
+@media (max-width: 1024px) {
+    .galeria-vehiculos {
+        gap: 20px; /* Reduce el espacio entre elementos */
+        justify-content: space-around; /* Distribuye los vehículos equitativamente */
+    }
+
+    .vehiculo {
+        width: 45%; /* Cada vehículo ocupa casi la mitad del ancho para mostrar dos por fila */
+        height: 200px; /* Aumenta un poco la altura para mejor visualización */
+    }
+    
+    .barra-superior {
+        padding: 0 30px; /* Reduce el relleno lateral */
+    }
+}
+
+/* Estilos para pantallas hasta 568px */
+@media (max-width: 568px) {
+    .galeria-vehiculos {
+        flex-direction: column; /* Apila los vehículos en una columna */
+        align-items: center; /* Centra los vehículos en el contenedor */
+    }
+
+    .vehiculo {
+        width: 100%; /* Cada vehículo ocupa el 100% del ancho del contenedor */
+        max-width: 300px; /* Un ancho máximo para que no se vean gigantes en tablets */
+        height: 200px; /* Ajusta la altura para móviles */
+    }
+
+    .info-vehiculo {
+        opacity: 1; /* Hace que la información sea visible siempre, sin necesidad de 'hover' */
+        position: static; /* Quita el posicionamiento absoluto para que el texto ocupe espacio */
+        border-radius: 0; /* Remueve los bordes redondeados */
+    }
+    
+    .vehiculo:hover {
+        transform: none; /* Deshabilita el efecto de "zoom" al pasar el mouse */
+    }
+
+    .barra-superior {
+        padding: 0 20px; /* Reduce el relleno en los lados de la barra superior */
+    }
+
+    .barra-superior .empresa {
+        font-size: 18px; /* Reduce el tamaño de la fuente del nombre de la empresa */
+    }
+
+    .barra-superior .usuario {
+        font-size: 14px; /* Reduce el tamaño de la fuente del nombre del usuario */
+        text-align: right;
+    }
+}
+.boton {
+    background: #fff94d;
+    color: #000000;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 32px;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+}
+
+.boton:hover {
+    background: #005fa3;
+    transform: translateY(-2px) scale(1.04);
+}
+
+/* Contenedor para alinear los botones horizontalmente */
+.boton-group {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
