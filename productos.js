@@ -9,15 +9,6 @@ const porPagina = 5;
 let productos = [];
 let totalPaginas = 1;
 
-// Obtener productos de la API
-fetch("https://japceibal.github.io/emercado-api/cats_products/101.json")
-    .then(response => response.json())
-    .then(data => {
-        productos = data.products;
-        totalPaginas = Math.ceil(productos.length / porPagina);
-        mostrarPagina(paginaActual);
-    });
-
 function mostrarPagina(pagina) {
     const contenedor = document.getElementById('contenedor-productos');
     contenedor.innerHTML = '';
@@ -77,3 +68,22 @@ document.addEventListener("DOMContentLoaded", () => {
         usuarioLogueado.innerHTML = `Bienvenido, <strong>${usuario}</strong>`;
     }
 });
+
+
+function setCatID(id) {
+  localStorage.setItem("catID", id);
+  window.location = "productos.html";
+};
+
+let catID = localStorage.getItem("catID"); 
+const URL = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
+
+    fetch(URL)
+      .then(response => response.json())
+      .then(data => {
+        productos = data.products; 
+        totalPaginas = Math.ceil(productos.length / porPagina);
+        paginaActual = 1;
+        mostrarPagina(paginaActual);
+      });
+
