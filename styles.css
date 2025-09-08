@@ -141,31 +141,6 @@ body.login-page {
     display: block;
     transition: transform 0.3s ease; /* **Clave** para la transición del zoom */
 }
-
-/* Efecto de zoom al pasar el mouse por encima de la tarjeta */
-.info-vehiculo {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #FFF94D;
-    color: #000000;
-    padding: 18px 14px 14px 14px; 
-    border-radius: 0 0 20px 20px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-family: 'Poppins', Arial, sans-serif;
-    font-size: 16px;
-    pointer-events: none;
-    box-sizing: border-box; 
-    min-height: 48px; 
-    word-break: break-word; 
-}
-
-.vehiculo:hover .info-vehiculo {
-    opacity: 1;
-}
-
 .vehiculo:hover {
     box-shadow: 0 6px 15px rgba(0,0,0,0.25); /* Opcional: la sombra se hace más intensa */
 }
@@ -635,12 +610,4 @@ main {
 .fondo-blanco {
     background-color: #ffffff; /* O el color que prefieras */
     transition: background-color 1s ease-in-out; /* Transición suave para el cambio de color */
-}
-/* Contenedor para alinear los botones horizontalmente */
-.boton-group {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin: 20px 0;
 }
