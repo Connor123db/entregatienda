@@ -1,3 +1,13 @@
+window.addEventListener('scroll', function() {
+    // Verifica si el scroll vertical es mayor a 100 píxeles
+    if (window.scrollY > 100) {
+        // Si es así, añade la clase "fondo-blanco" al body
+        document.body.classList.add('fondo-blanco');
+    } else {
+        // Si el scroll está por encima, quita la clase
+        document.body.classList.remove('fondo-blanco');
+    }
+});
 // Comprobar si el usuario está logueado
 if (!localStorage.getItem('usuario')) {
     window.location.href = 'index.html';
@@ -9,6 +19,9 @@ const porPagina = 5;
 let productos = [];
 let totalPaginas = 1;
 
+// productos.js
+// ... (código existente)
+
 function mostrarPagina(pagina) {
     const contenedor = document.getElementById('contenedor-productos');
     contenedor.innerHTML = '';
@@ -17,11 +30,15 @@ function mostrarPagina(pagina) {
     const fin = inicio + porPagina;
     const productosPagina = productos.slice(inicio, fin);
 
-    // Crear galería de productos
     const galeria = document.createElement('div');
     galeria.className = 'galeria-vehiculos';
 
     productosPagina.forEach(producto => {
+        // Envolver el div del producto en un enlace
+        const enlaceProducto = document.createElement('a');
+        enlaceProducto.href = `detalle_productos.html?id=${producto.id}`;
+        enlaceProducto.classList.add('enlace-producto');
+
         const div = document.createElement('div');
         div.classList.add('vehiculo');
 
@@ -40,7 +57,11 @@ function mostrarPagina(pagina) {
         `;
         div.appendChild(info);
 
-        galeria.appendChild(div);
+        // Agrega el div del producto dentro del enlace
+        enlaceProducto.appendChild(div);
+
+        // Agrega el enlace a la galería
+        galeria.appendChild(enlaceProducto);
     });
 
     contenedor.appendChild(galeria);
