@@ -9,20 +9,22 @@
 <body>
     <div class="barra-superior">
         <span class="empresa">Jovenes a Programar</span>
+                            <div class="dropdown">
+      <button class="dropbtn">Categorías</button>
+      <div class="dropdown-content">
+        <a href="#" onclick="redirigirCategoria(101)">Autos</a>
+        <a href="#" onclick="redirigirCategoria(102)">Juguetes</a>
+        <a href="#" onclick="redirigirCategoria(103)">Muebles</a>
+        <a href="#" onclick="redirigirCategoria(105)">Electrónica</a>
+        <a href="#" onclick="redirigirCategoria(106)">Ropa</a>
+        <a href="#" onclick="redirigirCategoria(107)">Calzados</a>
+        <a href="#" onclick="redirigirCategoria(108)">Hogar</a>
+        <a href="#" onclick="redirigirCategoria(109)">Deportes</a>
+      </div>
+     </div>
         <span class="usuario" id="usuario-logueado"></span>
     </div>
     <div class="contenedor-principal">
-        <div class="boton-group">
-            <div onclick="setCatID(101)" class="boton">Autos</div>
-            <div onclick="setCatID(102)" class="boton">Juguetes</div>
-            <div onclick="setCatID(103)" class="boton">Muebles</div>
-            <div onclick="setCatID(105)" class="boton">Electrónica</div>
-            <div onclick="setCatID(106)" class="boton">Ropa</div>
-            <div onclick="setCatID(107)" class="boton">Calzados</div>
-            <div onclick="setCatID(108)" class="boton">Hogar</div>
-            <div onclick="setCatID(109)" class="boton">Deportes</div>
-
-        </div>
         <div id="contenedor-productos"></div>
     </div>
      <div class="galeria-vehiculos">
