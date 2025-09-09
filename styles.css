@@ -2,7 +2,7 @@
 /* =================== ESTILOS GENERALES =================== */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1A88E2; /* Fondo azul */
+    background-color: #fef3e2; /* Fondo */
     margin: 0;
     padding: 0;
     text-align: center;
@@ -152,8 +152,8 @@ body.login-page {
 .barra-superior {
     width: 100%;
     height: 60px;
-    background: #111;
-    color: #fff;
+    background: #37526c;
+    color: #fef3e2;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -175,7 +175,7 @@ body.login-page {
 .barra-superior .usuario {
     font-size: 18px;
     font-weight: 500;
-    color: #ccc;
+    color: #fef3e2;
 }
 
 body {
@@ -184,8 +184,8 @@ body {
 
 footer {
     width: 100%;
-    background: #111;
-    color: #fff;
+    background: #37526c;
+    color: #fef3e2;
     text-align: center;
     padding: 15px 0;
     position: fixed;
@@ -199,7 +199,7 @@ footer {
 }
 
 .paginacion button {
-    background: #FFF94D;
+    background: #f9b22d;
     color: #111;
     border: none;
     border-radius: 8px;
@@ -270,7 +270,7 @@ footer {
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
-    background-color: #1A88E2; /* Un azul suave para el fondo */
+    background-color: #fef3e2; /* Un azul suave para el fondo */
     color: #333; /* Texto oscuro para mayor legibilidad */
     display: flex; /* Para centrar el h1 y el main */
     flex-direction: column;
@@ -292,7 +292,7 @@ main {
     align-items: flex-start;
     padding: 30px; /* Más padding interno */
     gap: 40px; /* Más espacio entre las columnas */
-    background-color: #FFF94D; /* Fondo amarillo para la tarjeta principal */
+    background-color: #37526c; /* Fondo azul para la tarjeta principal */
     margin: 20px auto;
     max-width: 1300px; /* Ancho máximo aumentado */
     border-radius: 12px; /* Bordes más redondeados */
@@ -303,7 +303,7 @@ main {
 .imagenes-container {
     display: flex;
     gap: 20px; /* Espacio entre miniaturas y imagen principal */
-    background-color: #1A88E2; /* Un fondo muy suave para el contenedor de imágenes */
+    background-color: #fef3e2; /* Un fondo muy suave para el contenedor de imágenes */
     padding: 20px;
     border-radius: 10px;
     flex: 0 0 auto;
@@ -328,12 +328,12 @@ main {
 }
 
 .miniaturas img.active {
-    border-color: #007bff; /* Borde azul vibrante para la activa */
+    border-color: #fef3e2; /* Borde azul vibrante para la activa */
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Sombra alrededor de la activa */
 }
 
 .miniaturas img:hover {
-    border-color: #007bff; /* Borde azul al pasar el mouse */
+    border-color: #004b9b; /* Borde azul al pasar el mouse */
     transform: scale(1.08); /* Zoom un poco mayor */
 }
 
@@ -392,7 +392,7 @@ main {
 /* Contenedor de información (derecha de las imágenes) */
 .info-container {
     flex: 1;
-    background-color: #1A88E2; /* Fondo azul para la información */
+    background-color: #fef3e2; /* Fondo azul para la información */
     padding: 30px; /* Más padding interno */
     border-radius: 12px; /* Bordes más redondeados */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra sutil */
@@ -508,13 +508,13 @@ main {
 #product-description {
     font-size: 1em;
     line-height: 1.5;
-    color: #e0e0e0;
+    color: #37526c;
 }
 
 #product-price {
     font-size: 1.5em;
     font-weight: bold;
-    color: #FFF94D; /* Casi negro para el precio, sugiere "oferta" o "disponible" */
+    color: #37526c; /* Casi negro para el precio, sugiere "oferta" o "disponible" */
 
 }
 
@@ -549,7 +549,7 @@ main {
 }
 
 #add-to-cart-btn:hover {
-    background-color: #FFF94D;
+    background-color: #37526c;
     color: #333;
 }
 
@@ -588,7 +588,7 @@ main {
 }
 
 .boton {
-    background: #fff94d;
+    background: #f9b22d; 
     color: #000000;
     border: none;
     border-radius: 20px;
@@ -602,8 +602,8 @@ main {
 }
 
 .boton:hover {
-    background: #005fa3;
-    color: #fff;
+    background: #fef3e2;
+    color: #000000;
     transform: translateY(-2px) scale(1.04);
 }
 
