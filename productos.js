@@ -114,5 +114,6 @@ const URL = `https://japceibal.github.io/emercado-api/cats_products/${catID}.jso
 
   // Redirigir a la página de productos
   window.location.href = "productos.html";
+}
 
 
