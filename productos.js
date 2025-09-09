@@ -108,3 +108,11 @@ const URL = `https://japceibal.github.io/emercado-api/cats_products/${catID}.jso
         mostrarPagina(paginaActual);
       });
 
+      function redirigirCategoria(catID) {
+  // Guardar categoría seleccionada en localStorage
+  localStorage.setItem("catID", catID);
+
+  // Redirigir a la página de productos
+  window.location.href = "productos.html";
+
+
