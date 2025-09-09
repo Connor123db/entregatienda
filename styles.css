@@ -612,15 +612,6 @@ main {
     transition: background-color 1s ease-in-out; /* Transición suave para el cambio de color */
 }
 
-.barra-superior {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #222;
-  color: white;
-  padding: 10px 20px;
-}
-
 .dropdown {
   position: relative;
   display: inline-block;
