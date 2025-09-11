@@ -656,4 +656,132 @@ main {
   background-color: #666;
 }
 
+/*Filtros y Ordenamiento*/
+/* Contenedor filtros */
+.filtros {
+    background-color: #444;
+    padding: 20px 30px;
+    border-radius: 19px;
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.25);
+    max-width: 480px;
+    margin: 30px auto;
+    font-family: 'Poppins', Arial, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Título */
+.filtros h3 {
+    width: 100%;
+    font-weight: 800;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Labels */
+.filtros label {
+    font-weight: 600;
+    color: #fff;
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+/* Agrupa cada label+input en línea dentro de .filtros */
+.filtros label,
+.filtros input[type="number"] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-bottom: 0;
+}
+
+/* Inputs de número */
+.filtros input[type="number"] {
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+    padding: 0 15px;
+    font-size: 16px;
+    font-weight: 600;
+    background: #f9b22d;
+    color: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: background 0.2s;
+}
+
+.filtros input[type="number"]::placeholder {
+    color: #cce4f7;
+}
+
+.filtros input[type="number"]:focus {
+    outline: none;
+    background: #f9b22d;
+}
+
+/* Botones filtrar y limpiar */
+.filtros button,
+.filtros select#ordenar {
+    height: 40px;
+    border-radius: 16px;
+    border: none;
+    padding: 0 15px;
+    font-size: 16px;
+    font-weight: 600;
+    background: #f9b22d;
+    color: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.filtros button {
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 10px 24px;
+}
+
+.filtros button:hover,
+.filtros select#ordenar:hover,
+.filtros select#ordenar:focus {
+    background: #0f5ea8;
+    outline: none;
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* Responsive: en pantallas pequeñas apilar verticalmente */
+@media (max-width: 480px) {
+    .filtros {
+        flex-direction: column;
+        max-width: 90%;
+        padding: 15px 20px;
+    }
+    .filtro-par {
+        display: flex;
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    .filtro-par label,
+    .filtro-par input {
+        width: auto;
+        flex: none;
+    }
+    .filtros h3 {
+        font-size: 20px;
+    }
+    .filtros label,
+    .filtros input[type="number"],
+    .filtros button,
+    .filtros select#ordenar {
+        width: 100%;
+        max-width: none;
+        margin: 5px 0;
+    }
+}
 
