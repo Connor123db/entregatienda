@@ -25,9 +25,9 @@
         <span class="usuario" id="usuario-logueado"></span>
     </div>
     <div class="contenedor-principal">
-        <!-- Filtros y Orden -->
+          <!-- Filtros y Orden -->  
+        <div class="barra-filtros-orden">
         <div class="filtros">
-            <h3>Filtros y Orden</h3>
             <span class="filtro-par">
                 <label for="precio-min">Precio mínimo:</label>
                 <input type="number" id="precio-min" placeholder="Mínimo">
@@ -38,16 +38,19 @@
             </span>
             <button id="btn-filtrar">Filtrar</button>
             <button id="btn-limpiar">Limpiar</button>
+        </div>
+        <div class="barra-ordenar">
             <select id="ordenar">
                 <option value="">Ordenar por...</option>
                 <option value="precio-asc">Precio (menor a mayor)</option>
                 <option value="precio-desc">Precio (mayor a menor)</option>
                 <option value="relevancia">Relevancia (más vendidos)</option>
             </select>
-     </div>
-        <!-- Contenedor de productos -->
-        <div id="contenedor-productos"></div>
+        </div>
     </div>
+    <!-- Contenedor de productos -->
+    <div id="contenedor-productos"></div>
+</div>
      <div class="galeria-vehiculos">
     </div>
 </div>
