@@ -116,4 +116,52 @@ const URL = `https://japceibal.github.io/emercado-api/cats_products/${catID}.jso
   window.location.href = "productos.html";
 }
 
+// Filtros y Ordenamiento
+
+let productosFiltrados = [];
+
+// Función auxiliar: obtiene la lista actual según filtros
+function getListaActual() {
+    return productosFiltrados.length ? productosFiltrados : productos;
+// Filtro por rango de precio
+document.getElementById("btn-filtrar").addEventListener("click", () => {
+    const min = parseFloat(document.getElementById("precio-min").value) || 0;
+    const max = parseFloat(document.getElementById("precio-max").value) || Infinity;
+
+    productosFiltrados = productos.filter(p => p.cost >= min && p.cost <= max);
+
+    totalPaginas = Math.ceil(productosFiltrados.length / porPagina) || 1;
+    paginaActual = 1;
+    mostrarPagina(paginaActual);
+});
+
+// Limpiar filtro
+document.getElementById("btn-limpiar").addEventListener("click", () => {
+    document.getElementById("precio-min").value = "";
+    document.getElementById("precio-max").value = "";
+    productosFiltrados = [];
+
+    totalPaginas = Math.ceil(productos.length / porPagina);
+    paginaActual = 1;
+    mostrarPagina(paginaActual);
+});
+
+// Ordenamiento
+document.getElementById("ordenar").addEventListener("change", (e) => {
+    let lista = getListaActual().slice();
+
+    if (e.target.value === "precio-asc") {
+        lista.sort((a, b) => a.cost - b.cost);
+    } else if (e.target.value === "precio-desc") {
+        lista.sort((a, b) => b.cost - a.cost);
+    } else if (e.target.value === "relevancia") {
+        lista.sort((a, b) => b.soldCount - a.soldCount);
+    }
+
+    // mostramos ya ordenado
+    productosFiltrados = lista;
+    totalPaginas = Math.ceil(productosFiltrados.length / porPagina);
+    paginaActual = 1;
+    mostrarPagina(paginaActual);
+});
 
