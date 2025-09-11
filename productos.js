@@ -26,6 +26,7 @@ function mostrarPagina(pagina) {
     const contenedor = document.getElementById('contenedor-productos');
     contenedor.innerHTML = '';
 
+    // Usa la lista filtrada/ordenada si existe
     const lista = getListaActual();
     const inicio = (pagina - 1) * porPagina;
     const fin = inicio + porPagina;
@@ -35,11 +36,9 @@ function mostrarPagina(pagina) {
     galeria.className = 'galeria-vehiculos';
 
     productosPagina.forEach(producto => {
-        // Envolver el div del producto en un enlace
         const enlaceProducto = document.createElement('a');
         enlaceProducto.href = `detalle_productos.html?id=${producto.id}`;
         enlaceProducto.classList.add('enlace-producto');
-
 
         const div = document.createElement('div');
         div.classList.add('vehiculo');
@@ -59,16 +58,13 @@ function mostrarPagina(pagina) {
         `;
         div.appendChild(info);
 
-        // Agrega el div del producto dentro del enlace
         enlaceProducto.appendChild(div);
-
-        // Agrega el enlace a la galería
         galeria.appendChild(enlaceProducto);
     });
 
     contenedor.appendChild(galeria);
 
-     document.getElementById('pagina-actual').textContent = `Página ${pagina} de ${totalPaginas}`;
+    document.getElementById('pagina-actual').textContent = `Página ${pagina} de ${totalPaginas}`;
 }
 
 document.getElementById('btn-anterior').addEventListener('click', () => {
@@ -125,7 +121,9 @@ let productosFiltrados = [];
 // Función auxiliar: obtiene la lista actual según filtros
 function getListaActual() {
     return productosFiltrados.length ? productosFiltrados : productos;
-// Filtro por rango de precio
+}
+
+// FILTRO por rango de precio
 document.getElementById("btn-filtrar").addEventListener("click", () => {
     const min = parseFloat(document.getElementById("precio-min").value) || 0;
     const max = parseFloat(document.getElementById("precio-max").value) || Infinity;
@@ -137,7 +135,7 @@ document.getElementById("btn-filtrar").addEventListener("click", () => {
     mostrarPagina(paginaActual);
 });
 
-// Limpiar filtro
+// LIMPIAR filtro
 document.getElementById("btn-limpiar").addEventListener("click", () => {
     document.getElementById("precio-min").value = "";
     document.getElementById("precio-max").value = "";
@@ -148,7 +146,7 @@ document.getElementById("btn-limpiar").addEventListener("click", () => {
     mostrarPagina(paginaActual);
 });
 
-// Ordenamiento
+// ORDENAMIENTO
 document.getElementById("ordenar").addEventListener("change", (e) => {
     let lista = getListaActual().slice();
 
@@ -166,4 +164,5 @@ document.getElementById("ordenar").addEventListener("change", (e) => {
     paginaActual = 1;
     mostrarPagina(paginaActual);
 });
+
 
