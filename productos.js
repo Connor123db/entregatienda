@@ -26,9 +26,10 @@ function mostrarPagina(pagina) {
     const contenedor = document.getElementById('contenedor-productos');
     contenedor.innerHTML = '';
 
+    const lista = getListaActual();
     const inicio = (pagina - 1) * porPagina;
     const fin = inicio + porPagina;
-    const productosPagina = productos.slice(inicio, fin);
+    const productosPagina = lista.slice(inicio, fin);
 
     const galeria = document.createElement('div');
     galeria.className = 'galeria-vehiculos';
@@ -38,6 +39,7 @@ function mostrarPagina(pagina) {
         const enlaceProducto = document.createElement('a');
         enlaceProducto.href = `detalle_productos.html?id=${producto.id}`;
         enlaceProducto.classList.add('enlace-producto');
+
 
         const div = document.createElement('div');
         div.classList.add('vehiculo');
@@ -66,7 +68,7 @@ function mostrarPagina(pagina) {
 
     contenedor.appendChild(galeria);
 
-    document.getElementById('pagina-actual').textContent = `Página ${pagina} de ${totalPaginas}`;
+     document.getElementById('pagina-actual').textContent = `Página ${pagina} de ${totalPaginas}`;
 }
 
 document.getElementById('btn-anterior').addEventListener('click', () => {
