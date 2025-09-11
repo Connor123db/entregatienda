@@ -164,5 +164,3 @@ document.getElementById("ordenar").addEventListener("change", (e) => {
     paginaActual = 1;
     mostrarPagina(paginaActual);
 });
-
-
