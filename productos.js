@@ -1,27 +1,26 @@
 window.addEventListener('scroll', function() {
-    // Verifica si el scroll vertical es mayor a 100 píxeles
     if (window.scrollY > 100) {
-        // Si es así, añade la clase "fondo-blanco" al body
         document.body.classList.add('fondo-blanco');
     } else {
-        // Si el scroll está por encima, quita la clase
         document.body.classList.remove('fondo-blanco');
     }
 });
-// Comprobar si el usuario está logueado
+
 if (!localStorage.getItem('usuario')) {
     window.location.href = 'index.html';
 }
 
-// Variables de paginación
+// Variables de paginación y productos
 let paginaActual = 1;
 const porPagina = 5;
-let productos = [];
+let productos = []; // Lista original de todos los productos
+let productosFiltrados = []; // Lista para filtros de precio y búsqueda
 let totalPaginas = 1;
 
-// productos.js
-// ... (código existente)
+// Referencia al campo de búsqueda del HTML
+const filtroBusqueda = document.getElementById('filtro-busqueda');
 
+// Función que muestra los productos en la página actual
 function mostrarPagina(pagina) {
     const contenedor = document.getElementById('contenedor-productos');
     contenedor.innerHTML = '';
@@ -63,10 +62,10 @@ function mostrarPagina(pagina) {
     });
 
     contenedor.appendChild(galeria);
-
     document.getElementById('pagina-actual').textContent = `Página ${pagina} de ${totalPaginas}`;
 }
 
+// Eventos de paginación
 document.getElementById('btn-anterior').addEventListener('click', () => {
     if (paginaActual > 1) {
         paginaActual--;
@@ -76,10 +75,11 @@ document.getElementById('btn-anterior').addEventListener('click', () => {
 
 document.getElementById('btn-siguiente').addEventListener('click', () => {
     if (paginaActual < totalPaginas) {
-        paginaActual++
-             mostrarPagina(paginaActual);
+        paginaActual++;
+        mostrarPagina(paginaActual);
     }
 });
+
 document.addEventListener("DOMContentLoaded", () => {
     const usuario = localStorage.getItem("usuario");
     const usuarioLogueado = document.getElementById("usuario-logueado");
@@ -88,57 +88,65 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-
 function setCatID(id) {
-  localStorage.setItem("catID", id);
-  window.location = "productos.html";
+    localStorage.setItem("catID", id);
+    window.location = "productos.html";
 };
 
-let catID = localStorage.getItem("catID"); 
+let catID = localStorage.getItem("catID");
 const URL = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
 
-    fetch(URL)
-      .then(response => response.json())
-      .then(data => {
-        productos = data.products; 
+fetch(URL)
+    .then(response => response.json())
+    .then(data => {
+        productos = data.products;
         totalPaginas = Math.ceil(productos.length / porPagina);
         paginaActual = 1;
         mostrarPagina(paginaActual);
-      });
+    });
 
-      function redirigirCategoria(catID) {
-  // Guardar categoría seleccionada en localStorage
-  localStorage.setItem("catID", catID);
-
-  // Redirigir a la página de productos
-  window.location.href = "productos.html";
+function redirigirCategoria(catID) {
+    localStorage.setItem("catID", catID);
+    window.location.href = "productos.html";
 }
 
-// Filtros y Ordenamiento
-
-let productosFiltrados = [];
-
-// Función auxiliar: obtiene la lista actual según filtros
+// Función auxiliar: obtiene la lista actual según filtros y ordenamiento
 function getListaActual() {
-    return productosFiltrados.length ? productosFiltrados : productos;
+    return productosFiltrados.length > 0 ? productosFiltrados : productos;
 }
 
-// FILTRO por rango de precio
-document.getElementById("btn-filtrar").addEventListener("click", () => {
+// Función que aplica todos los filtros (precio y búsqueda)
+function aplicarFiltros() {
+    const textoBusqueda = filtroBusqueda.value.toLowerCase();
     const min = parseFloat(document.getElementById("precio-min").value) || 0;
     const max = parseFloat(document.getElementById("precio-max").value) || Infinity;
 
-    productosFiltrados = productos.filter(p => p.cost >= min && p.cost <= max);
+    // Filtra los productos que coinciden con la búsqueda y el rango de precio
+    productosFiltrados = productos.filter(producto => {
+        const titulo = producto.name.toLowerCase();
+        const descripcion = producto.description.toLowerCase();
+        
+        const coincideBusqueda = titulo.includes(textoBusqueda) || descripcion.includes(textoBusqueda);
+        const coincidePrecio = producto.cost >= min && producto.cost <= max;
 
+        return coincideBusqueda && coincidePrecio;
+    });
+
+    // Recalcula la paginación y muestra la primera página de los resultados
     totalPaginas = Math.ceil(productosFiltrados.length / porPagina) || 1;
     paginaActual = 1;
     mostrarPagina(paginaActual);
-});
+}
 
-// LIMPIAR filtro
+// Eventos para los filtros
+filtroBusqueda.addEventListener('input', aplicarFiltros);
+document.getElementById("btn-filtrar").addEventListener("click", aplicarFiltros);
+
+// LIMPIAR filtros
 document.getElementById("btn-limpiar").addEventListener("click", () => {
     document.getElementById("precio-min").value = "";
     document.getElementById("precio-max").value = "";
+    filtroBusqueda.value = ""; // Limpia el campo de búsqueda
     productosFiltrados = [];
 
     totalPaginas = Math.ceil(productos.length / porPagina);
@@ -158,7 +166,6 @@ document.getElementById("ordenar").addEventListener("change", (e) => {
         lista.sort((a, b) => b.soldCount - a.soldCount);
     }
 
-    // mostramos ya ordenado
     productosFiltrados = lista;
     totalPaginas = Math.ceil(productosFiltrados.length / porPagina);
     paginaActual = 1;
