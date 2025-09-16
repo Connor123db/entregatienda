@@ -393,12 +393,12 @@ main {
 .info-container {
     flex: 1;
     background-color: #fef3e2; /* Fondo azul para la información */
-    padding: 30px; /* Más padding interno */
+    padding: 70px; /* Más padding interno */
     border-radius: 12px; /* Bordes más redondeados */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra sutil */
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Más espacio entre los elementos de información */
+    gap: 0,5px; /* Más espacio entre los elementos de información */
 }
 
 #product-name {
@@ -412,19 +412,8 @@ main {
 /* Contenedor de botones (debajo de la información) */
 .botones-container {
     display: flex;
-    gap: 15px; /* Más espacio entre botones */
-    margin-top: 30px; /* Más espacio arriba de los botones */
-    justify-content: flex-end;
-}
-
-.botones-container button {
-    padding: 12px 25px; /* Más padding para botones */
-    border: none;
-    border-radius: 500px; /* Bordes más redondeados */
-    font-size: 1.1em; /* Texto de botón más grande */
-    cursor: pointer;
-    transition: all 0.3s ease; /* Transición suave para todos los cambios */
-    font-weight: 600;
+    flex-direction: column; /* Coloca los botones en columna */
+    align-items: center;    /* Opcional: centra los botones horizontalmente */
 }
 
 
