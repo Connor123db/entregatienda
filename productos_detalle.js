@@ -1,57 +1,64 @@
-document.addEventListener('DOMContentLoaded', () => { 
+document.addEventListener('DOMContentLoaded', () => {
+    // La lógica de obtener el ID se mantiene igual
     const params = new URLSearchParams(window.location.search);
     const productId = params.get('id');
 
-    if (productId) {  
-        // Primera llamada: a la API del producto individual
-        // Usamos PRODUCT_INFO_URL y el ID del producto
-        const PRODUCT_URL = PRODUCT_INFO_URL + productId + EXT_TYPE; // URL completa del producto
-
-        fetch(PRODUCT_URL) // Primera llamada a la API del producto
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al cargar la información del producto.');
-                }
-                return response.json();
-                console.log(response);
-            })
-            .then(productData => {
-                // Aquí ya tenemos la información completa del producto, incluyendo las imágenes.
-
-                // 1. Cargar la información textual
-                document.getElementById('product-name').textContent = productData.name;
-                document.getElementById('product-description').textContent = productData.description;
-                document.getElementById('product-price').textContent = `Precio: ${productData.currency} ${productData.cost}`;
-                document.getElementById('product-soldCount').textContent = `Vendidos: ${productData.soldCount}`;
-
-                // 2. Cargar las imágenes
-                // Ahora usamos el array 'images' que viene en esta respuesta de la API.
-                loadProductImages(productData.images);
-
-                // 3. Lógica de los botones
-                document.getElementById('add-to-cart-btn').addEventListener('click', () => {
-                    console.log(`Producto ${productData.name} (ID: ${productData.id}) agregado al carrito.`); 
-                });
-
-                document.getElementById('buy-now-btn').addEventListener('click', () => {
-                    console.log(`Comprando el producto ${productData.name} (ID: ${productData.id}).`);
-                }); 
-
-            })
-            .catch(error => {
-                console.error('Error al cargar los datos del producto:', error);
-                window.location.href = 'productos.html';
-            });
+    if (productId) {
+        // Llamada inicial para cargar los detalles del producto
+        loadProductDetails(productId);
     } else {
         console.error('ID de producto no proporcionado.');
         window.location.href = 'productos.html';
     }
 });
 
-// Función para cargar las imágenes (esta función se mantiene igual)
-function loadProductImages(images) { // images es un array de URLs de imágenes
-    const imagenPrincipal = document.getElementById('imagenPrincipal'); // Imagen principal
-    const miniaturas = document.querySelectorAll('.miniaturas img'); // Miniaturas
+// Nueva función principal para cargar los detalles del producto
+function loadProductDetails(productId) {
+    const PRODUCT_URL = PRODUCT_INFO_URL + productId + EXT_TYPE;
+
+    fetch(PRODUCT_URL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar la información del producto.');
+            }
+            return response.json();
+        })
+        .then(productData => {
+            // 1. Cargar la información textual
+            document.getElementById('product-name').textContent = productData.name;
+            document.getElementById('product-description').textContent = productData.description;
+            document.getElementById('product-price').textContent = `Precio: ${productData.currency} ${productData.cost}`;
+            document.getElementById('product-soldCount').textContent = `Vendidos: ${productData.soldCount}`;
+
+            // 2. Cargar las imágenes
+            loadProductImages(productData.images);
+
+            // 3. Lógica de los botones (se mantiene igual)
+            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+                console.log(`Producto ${productData.name} (ID: ${productData.id}) agregado al carrito.`);
+            });
+
+            document.getElementById('buy-now-btn').addEventListener('click', () => {
+                console.log(`Comprando el producto ${productData.name} (ID: ${productData.id}).`);
+            });
+
+            // 4. Mostrar los productos relacionados
+            if (productData.relatedProducts && productData.relatedProducts.length > 0) {
+                displayRelatedProducts(productData.relatedProducts);
+            } else {
+                document.getElementById('productos-relacionados').innerHTML = '<p>No hay productos relacionados disponibles.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar los datos del producto:', error);
+            window.location.href = 'productos.html';
+        });
+}
+
+// La función para cargar las imágenes se mantiene igual
+function loadProductImages(images) {
+    const imagenPrincipal = document.getElementById('imagenPrincipal');
+    const miniaturas = document.querySelectorAll('.miniaturas img');
 
     if (!images || images.length === 0) {
         console.error('No se encontraron imágenes para este producto.');
@@ -102,4 +109,40 @@ function loadProductImages(images) { // images es un array de URLs de imágenes
     if (miniaturas.length > 0) {
         miniaturas[0].classList.add('active');
     }
+}
+
+// Modifica la función para mostrar productos relacionados
+function displayRelatedProducts(relatedProducts) {
+    const relatedProductsContainer = document.getElementById('productos-relacionados');
+    // Limpia el contenedor antes de agregar nuevos productos
+    relatedProductsContainer.innerHTML = '';
+    
+    relatedProducts.forEach(related => {
+        const relatedProductUrl = PRODUCT_INFO_URL + related.id + EXT_TYPE;
+        fetch(relatedProductUrl)
+            .then(response => response.json())
+            .then(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('vehiculo');
+                productDiv.dataset.id = product.id;
+                
+                productDiv.innerHTML = `
+                    <img src="${product.images[0]}" alt="${product.name}">
+                    <div class="info-vehiculo">
+                        <h4>${product.name}</h4>
+                    </div>
+                `;
+
+                // Aquí está el cambio clave:
+                // En lugar de recargar la página, solo actualizamos el contenido
+                productDiv.addEventListener('click', () => {
+                    loadProductDetails(product.id);
+                    // Opcional: Para actualizar la URL en la barra de direcciones sin recargar
+                    window.history.pushState(null, '', `detalle_productos.html?id=${product.id}`);
+                });
+                
+                relatedProductsContainer.appendChild(productDiv);
+            })
+            .catch(error => console.error('Error al cargar el producto relacionado:', error));
+    });
 }
