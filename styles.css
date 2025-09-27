@@ -565,3 +565,88 @@ main {
     .barra-superior .empresa { font-size: 18px; }
     .barra-superior .usuario { font-size: 14px; text-align: right; }
 }
+
+/* =================== DETALLE PRODUCTOS =================== */
+
+/* Contenedor principal: apila los elementos verticalmente */
+main {
+    display: flex;
+    flex-direction: column; /* Apila .top-section y .productos-relacionados-seccion */
+    align-items: center; /* Centra el contenido */
+    padding: 2%;
+    background-color: #37526c;
+    margin: 20px auto;
+    max-width: 1300px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor superior (secciones verde y roja): las coloca en fila */
+.top-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    gap: 40px; /* Espacio entre las secciones de imágenes y de info */
+}
+
+
+/* Contenedor de imágenes (cuadro verde) */
+.imagenes-container {
+    flex: 1; /* Permite que este contenedor crezca */
+    background-color: #fef3e2;
+    padding: 100px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex; /* Nuevo: para alinear las miniaturas y la imagen principal */
+    gap: 20px;
+}
+
+/* Contenedor de información (cuadro rojo) */
+.info-container {
+    gap: 80px; /* Espacio entre los elementos dentro del contenedor */
+    height: 100%;
+    flex: 1; /* Permite que este contenedor crezca */
+    background-color: #fef3e2; 
+    padding: 100px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); 
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo para los productos individuales dentro de la sección de relacionados */
+#productos-relacionados {
+    background-color: #fef3e2;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row; /* Para mostrar los productos en una fila */
+    justify-content: center; /* Centra los productos horizontalmente */
+    align-items: center; /* Centra los productos verticalmente */
+    flex-wrap: wrap; /* Permite que los productos pasen a una nueva línea si no hay espacio */
+    gap: 40px; /* Espacio entre los productos */
+    width: 92%; /* Ocupa casi todo el ancho del contenedor principal */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+    padding: 80px; /* Espacio interno */
+    margin-top: 10px; /* Espacio superior */
+}
+
+#productos_detalle {
+    height: 100%; 
+    flex: 1; 
+    background-color: #37526c;
+    display: flex; 
+    gap: 40px;
+}
+
+.productos-relacionados-container {
+    width: 88%;
+    margin-top: 40px;
+    text-align: center;
+    color: #fef3e2;
+    padding: 20px;
+    border-radius: 12px;
+    
+}
