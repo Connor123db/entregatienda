@@ -640,13 +640,3 @@ main {
     display: flex; 
     gap: 40px;
 }
-
-.productos-relacionados-container {
-    width: 88%;
-    margin-top: 40px;
-    text-align: center;
-    color: #fef3e2;
-    padding: 20px;
-    border-radius: 12px;
-    
-}
