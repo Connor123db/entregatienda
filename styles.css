@@ -633,6 +633,7 @@ main {
     margin-top: 10px; /* Espacio superior */
 }
 
+
 #productos_detalle {
     height: 100%; 
     flex: 1; 
@@ -640,3 +641,115 @@ main {
     display: flex; 
     gap: 40px;
 }
+
+
+/* ------------------------------ AGREGAR COMENTARIOS Y CALIFICACIONES  ----------------------------------------
+
+/* 1. Estilos para el contenedor de agregar calificación y comentario */
+.agregar-Calificacion-Comentario {
+    background-color: #fef3e2; 
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra un poco más pronunciada */
+    
+    padding: 30px; /* Un poco más de espacio interno */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los bloques */
+    
+    width: 94%; 
+    max-width: none; 
+    margin: 20px 0;
+}
+
+.agregar-Calificacion-Comentario h2 {
+    text-align: left;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+/* Estilos para los textos "Tu calificación" y "Tu comentario" */
+.agregar-Calificacion-Comentario p {
+    text-align: left;
+    font-weight: bold; 
+    margin: 0; 
+}
+
+/* 2. Estilos para el contenedor de la calificación */
+.rating-info-container { /* Nueva clase para agrupar estrellas y texto */
+    display: flex;
+    align-items: center; /* Centra verticalmente estrellas y texto */
+    gap: 10px; /* Espacio entre las estrellas y el texto "1 de 5 estrellas" */
+    margin-bottom: 10px; /* Separación del comentario */
+}
+
+.rating-stars {
+    display: flex; 
+    gap: 3px; 
+    font-size: 28px; 
+}
+
+.rating-stars .star {
+    cursor: pointer;
+    /* Usa el color blanco para el "relleno" cuando están vacías */
+    color: #ffffff; 
+    
+    /* Propiedad clave: text-shadow para simular el contorno oscuro */
+    text-shadow: 
+        -1px -1px 0 #333, /* Arriba-izquierda */
+        1px -1px 0 #333,  /* Arriba-derecha */
+        -1px 1px 0 #333,  /* Abajo-izquierda */
+        1px 1px 0 #333;   /* Abajo-derecha */
+    
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+/* 2. Estilo para Estrellas Seleccionadas (Amarillo) */
+
+/* Si están seleccionadas cambian a color amarillo */
+.rating-stars .star.selected, 
+.rating-stars .star:hover { /* El estado hover sigue siendo importante */
+    color: hsl(57, 99%, 51%);
+    }
+
+/* Estilo para el texto "1 de 5 estrellas" */
+.rating-text { /* Nueva clase para el texto */
+    color: #948f8f; /* Un gris claro para el texto de calificación */
+    font-size: 1em;
+}
+
+
+/* 3. Estilos para el campo de comentario */
+.agregar-Calificacion-Comentario textarea {
+    padding: 15px; /* Un poco más de padding */
+    border: 1px solid #555; /* Borde más oscuro */
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    font-size: 16px;
+    resize: vertical; 
+    width: 100%; 
+    box-sizing: border-box; 
+    color: #333; /* Color de texto oscuro dentro del textarea */
+    min-height: 120px; /* Altura mínima para el textarea */
+}
+
+/* 4. Estilos para el botón de enviar */
+.submit-comment-btn {
+    background-color: #4b4e52; /* Color gris muy oscuro para el botón */
+    color: white;
+    padding: 12px 20px; /* Más padding para que sea más grande */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.15em; /* Fuente un poco más grande */
+    transition: background-color 0.3s ease;
+    width: 100%; /* Ocupa todo el ancho */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+    margin-top: 15px; /* Más espacio arriba del botón */
+}
+
+.submit-comment-btn:hover {
+    background-color: #5a5e62; /* Un poco más claro al pasar el ratón */
+}
+
+/* ------------------------------- FIN SECCION AGREGAR COMENTARIO Y CALIFICACION -----------------------------
