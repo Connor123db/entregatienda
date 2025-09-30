@@ -171,3 +171,22 @@ document.getElementById("ordenar").addEventListener("change", (e) => {
     paginaActual = 1;
     mostrarPagina(paginaActual);
 });
+
+function setProductID(id) {
+    localStorage.setItem("productID", id);  // guardamos el ID
+    window.location = "productos-info.html"; // redirigimos a la página de detalles
+}
+productos.forEach(producto => {
+    const card = document.createElement("div");
+    card.classList.add("list-group-item");
+    card.innerHTML = `
+        <h4>${producto.name}</h4>
+        <p>${producto.description}</p>
+        <small>${producto.currency} ${producto.cost}</small>
+    `;
+
+    // Al hacer click en la card, guardamos el ID y vamos a la página de detalles
+    card.addEventListener("click", () => setProductID(producto.id));
+
+    container.appendChild(card);
+});
