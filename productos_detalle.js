@@ -154,8 +154,24 @@ function displayRelatedProducts(relatedProducts) {
                     </div>
                 `;
 
+                // Click en producto relacionado
                 productDiv.addEventListener('click', () => {
+                    // 1. Actualizar detalles del producto
                     loadProductDetails(product.id);
+
+                    // 2. Actualizar localStorage con el nuevo productID
+                    localStorage.setItem("productID", product.id);
+
+                    // 3. Actualizar comentarios
+                    const PRODUCT_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
+                    const URL_COMMENTS = `${PRODUCT_COMMENTS_URL}${product.id}.json`;
+
+                    fetch(URL_COMMENTS)
+                        .then(res => res.json())
+                        .then(comments => showComments(comments))
+                        .catch(err => console.error("Error al cargar comentarios:", err));
+
+                    // 4. Actualizar la URL sin recargar la página
                     window.history.pushState(null, '', `detalle_productos.html?id=${product.id}`);
                 });
 
@@ -164,6 +180,7 @@ function displayRelatedProducts(relatedProducts) {
             .catch(error => console.error('Error al cargar el producto relacionado:', error));
     });
 }
+
 
 // --------------------
 // Funciones para comentarios
