@@ -1,18 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // La lógica de obtener el ID se mantiene igual
+    // Obtener el ID de producto desde la URL
     const params = new URLSearchParams(window.location.search);
     const productId = params.get('id');
 
     if (productId) {
+        // Guardarlo en localStorage para usarlo en comentarios
+        localStorage.setItem("productID", productId);
+
         // Llamada inicial para cargar los detalles del producto
         loadProductDetails(productId);
     } else {
         console.error('ID de producto no proporcionado.');
         window.location.href = 'productos.html';
     }
+
+    // --------------------
+    // Cargar comentarios
+    // --------------------
+    const productID = localStorage.getItem("productID");
+    if (!productID) {
+        console.error("No se encontró productID en localStorage");
+        document.getElementById("comments-container").innerHTML = "<p>No se pueden cargar comentarios.</p>";
+        return;
+    }
+
+    const PRODUCT_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
+    const URL_COMMENTS = `${PRODUCT_COMMENTS_URL}${productID}.json`;
+
+    fetch(URL_COMMENTS)
+        .then(res => res.json())
+        .then(comments => showComments(comments))
+        .catch(err => console.error("Error al cargar comentarios:", err));
 });
 
-// Nueva función principal para cargar los detalles del producto
+// --------------------
+// Función principal para cargar detalles del producto
+// --------------------
 function loadProductDetails(productId) {
     const PRODUCT_URL = PRODUCT_INFO_URL + productId + EXT_TYPE;
 
@@ -24,25 +47,24 @@ function loadProductDetails(productId) {
             return response.json();
         })
         .then(productData => {
-            // 1. Cargar la información textual
+            // Cargar la información textual
             document.getElementById('product-name').textContent = productData.name;
             document.getElementById('product-description').textContent = productData.description;
             document.getElementById('product-price').textContent = `Precio: ${productData.currency} ${productData.cost}`;
             document.getElementById('product-soldCount').textContent = `Vendidos: ${productData.soldCount}`;
 
-            // 2. Cargar las imágenes
+            // Cargar imágenes
             loadProductImages(productData.images);
 
-            // 3. Lógica de los botones (se mantiene igual)
+            // Botones
             document.getElementById('add-to-cart-btn').addEventListener('click', () => {
                 console.log(`Producto ${productData.name} (ID: ${productData.id}) agregado al carrito.`);
             });
-
             document.getElementById('buy-now-btn').addEventListener('click', () => {
                 console.log(`Comprando el producto ${productData.name} (ID: ${productData.id}).`);
             });
 
-            // 4. Mostrar los productos relacionados
+            // Productos relacionados
             if (productData.relatedProducts && productData.relatedProducts.length > 0) {
                 displayRelatedProducts(productData.relatedProducts);
             } else {
@@ -55,7 +77,9 @@ function loadProductDetails(productId) {
         });
 }
 
-// La función para cargar las imágenes se mantiene igual
+// --------------------
+// Función para cargar imágenes
+// --------------------
 function loadProductImages(images) {
     const imagenPrincipal = document.getElementById('imagenPrincipal');
     const miniaturas = document.querySelectorAll('.miniaturas img');
@@ -101,22 +125,19 @@ function loadProductImages(images) {
     function updateMainImage(index, images, miniaturas, imagenPrincipal) {
         imagenPrincipal.src = images[index];
         miniaturas.forEach(img => img.classList.remove('active'));
-        if (miniaturas[index]) {
-            miniaturas[index].classList.add('active');
-        }
+        if (miniaturas[index]) miniaturas[index].classList.add('active');
     }
 
-    if (miniaturas.length > 0) {
-        miniaturas[0].classList.add('active');
-    }
+    if (miniaturas.length > 0) miniaturas[0].classList.add('active');
 }
 
-// Modifica la función para mostrar productos relacionados
+// --------------------
+// Función para mostrar productos relacionados
+// --------------------
 function displayRelatedProducts(relatedProducts) {
     const relatedProductsContainer = document.getElementById('productos-relacionados');
-    // Limpia el contenedor antes de agregar nuevos productos
     relatedProductsContainer.innerHTML = '';
-    
+
     relatedProducts.forEach(related => {
         const relatedProductUrl = PRODUCT_INFO_URL + related.id + EXT_TYPE;
         fetch(relatedProductUrl)
@@ -125,7 +146,7 @@ function displayRelatedProducts(relatedProducts) {
                 const productDiv = document.createElement('div');
                 productDiv.classList.add('vehiculo');
                 productDiv.dataset.id = product.id;
-                
+
                 productDiv.innerHTML = `
                     <img src="${product.images[0]}" alt="${product.name}">
                     <div class="info-vehiculo">
@@ -133,16 +154,39 @@ function displayRelatedProducts(relatedProducts) {
                     </div>
                 `;
 
-                // Aquí está el cambio clave:
-                // En lugar de recargar la página, solo actualizamos el contenido
                 productDiv.addEventListener('click', () => {
                     loadProductDetails(product.id);
-                    // Opcional: Para actualizar la URL en la barra de direcciones sin recargar
                     window.history.pushState(null, '', `detalle_productos.html?id=${product.id}`);
                 });
-                
+
                 relatedProductsContainer.appendChild(productDiv);
             })
             .catch(error => console.error('Error al cargar el producto relacionado:', error));
     });
+}
+
+// --------------------
+// Funciones para comentarios
+// --------------------
+function showComments(comments) {
+    const container = document.getElementById("comments-container");
+    container.innerHTML = "";
+
+    comments.forEach(c => {
+        container.innerHTML += `
+            <div class="list-group-item">
+                <p><strong>${c.user}</strong> - <small>${c.dateTime}</small></p>
+                <p>${getStars(c.score)}</p>
+                <p>${c.description}</p>
+            </div>
+        `;
+    });
+}
+
+function getStars(score) {
+    let stars = "";
+    for (let i = 1; i <= 5; i++) {
+        stars += `<span class="fa fa-star" style="color:${i <= score ? "gold" : "lightgray"};"></span>`;
+    }
+    return stars;
 }
