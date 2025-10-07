@@ -753,3 +753,51 @@ main {
 }
 
 /* ------------------------------- FIN SECCION AGREGAR COMENTARIO Y CALIFICACION -----------------------------
+
+/* =================== BOTÓN MODO OSCURO =================== */
+.modo-oscuro-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffcc00;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  z-index: 1000;
+}
+
+.modo-oscuro-btn:hover {
+  background-color: #ffd633;
+  transform: scale(1.1);
+}
+
+/* =================== MODO OSCURO =================== */
+body.dark-mode {
+  background-color: #222;
+  color: #f1f1f1;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #1a1a1a;
+}
+
+body.dark-mode input,
+body.dark-mode select {
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #777;
+}
+
+body.dark-mode .modo-oscuro-btn {
+  background-color: #555;
+  color: #ffcc00;
+}
