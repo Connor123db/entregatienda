@@ -801,3 +801,47 @@ body.dark-mode .modo-oscuro-btn {
   background-color: #555;
   color: #ffcc00;
 }
+/* Contenedor principal de comentarios */
+body.dark-mode .agregar-Calificacion-Comentario {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Título "Comentarios" o "Agregar calificación" */
+body.dark-mode .agregar-Calificacion-Comentario h2,
+body.dark-mode .agregar-Calificacion-Comentario p {
+  color: #f1f1f1; /* texto claro */
+}
+
+/* Textarea para escribir comentario */
+body.dark-mode .agregar-Calificacion-Comentario textarea {
+  background-color: #3a3a3a;
+  color: #fff;
+  border: 1px solid #666;
+}
+
+/* Botón de enviar comentario */
+body.dark-mode .submit-comment-btn {
+  background-color: #555;
+  color: #ffcc00;
+}
+
+body.dark-mode .submit-comment-btn:hover {
+  background-color: #777;
+  color: #fff;
+}
+
+/* Estrellas de calificación */
+body.dark-mode .rating-stars .star {
+  color: #fff;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+body.dark-mode .rating-text {
+  color: #bbb;
+}
