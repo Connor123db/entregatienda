@@ -754,7 +754,7 @@ main {
 
 /* ------------------------------- FIN SECCION AGREGAR COMENTARIO Y CALIFICACION -----------------------------
 
-/* =================== BOTÓN MODO OSCURO =================== */
+/* =================== MODO OSCURO (CUADROS NEGROS) =================== */
 body.dark-mode {
   background-color: #222;
   color: #f1f1f1;
@@ -777,115 +777,45 @@ body.dark-mode .modo-oscuro-btn {
   color: #ffcc00;
 }
 
-/* =================== CUADRO PRINCIPAL DETALLES PRODUCTO =================== */
-body.dark-mode #detalles_productos {
-  background-color: #2a2a2a !important;
-  color: #f1f1f1 !important;
-  border: 1px solid #444;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
-}
-
-/* Fondo general */
-body.dark-mode main {
-  background-color: #1e1e1e;
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
-}
-
-/* =================== CUADRO DE IMÁGENES =================== */
-body.dark-mode .imagenes-container {
-  background-color: #2a2a2a;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
-}
-
-body.dark-mode .miniaturas img {
-  border: 2px solid #555;
-}
-
-body.dark-mode .miniaturas img.active {
-  border-color: #ffcc00;
-  box-shadow: 0 0 8px rgba(255, 204, 0, 0.7);
-}
-
-body.dark-mode .miniaturas img:hover {
-  border-color: #ffcc00;
-}
-
-/* Imagen principal */
-body.dark-mode .imagen-principal-wrapper {
-  background-color: #2a2a2a;
-}
-
-/* =================== CUADRO DE INFORMACIÓN DEL PRODUCTO =================== */
-body.dark-mode .info-container {
-  background-color: #2a2a2a;
-  color: #f1f1f1;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
-}
-
-body.dark-mode #product-name {
-  color: #ffcc00;
-}
-
-body.dark-mode #product-description {
-  color: #ccc;
-}
-
-body.dark-mode #product-price {
-  color: #ffcc00;
-}
-
-body.dark-mode #product-soldCount {
-  color: #aaa;
-}
-
-/* Botones dentro del cuadro de información */
-body.dark-mode .botones-container button {
-  background-color: #555;
-  color: #ffcc00;
-}
-
-body.dark-mode .botones-container button:hover {
-  background-color: #777;
-  color: #fff;
-}
-
-/* =================== PRODUCTOS RELACIONADOS =================== */
-body.dark-mode #productos-relacionados {
-  background-color: #2a2a2a;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
-}
-
-/* =================== COMENTARIOS =================== */
+/* Cuadros principales en negro */
+body.dark-mode .info-container,
+body.dark-mode .imagenes-container,
+body.dark-mode #productos-relacionados,
 body.dark-mode .agregar-Calificacion-Comentario {
-  background-color: #2a2a2a;
+  background-color: #111; /* negro profundo */
   color: #f1f1f1;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.08);
 }
 
+/* Títulos y textos */
 body.dark-mode .agregar-Calificacion-Comentario h2,
-body.dark-mode .agregar-Calificacion-Comentario p {
+body.dark-mode .agregar-Calificacion-Comentario p,
+body.dark-mode .info-container h1,
+body.dark-mode #product-name,
+body.dark-mode #product-description,
+body.dark-mode #product-price {
   color: #f1f1f1;
 }
 
 /* Textarea */
 body.dark-mode .agregar-Calificacion-Comentario textarea {
-  background-color: #3a3a3a;
+  background-color: #1e1e1e;
   color: #fff;
-  border: 1px solid #666;
+  border: 1px solid #555;
 }
 
-/* Botón de enviar comentario */
+/* Botón de enviar */
 body.dark-mode .submit-comment-btn {
-  background-color: #555;
+  background-color: #333;
   color: #ffcc00;
 }
 
 body.dark-mode .submit-comment-btn:hover {
-  background-color: #777;
+  background-color: #555;
   color: #fff;
 }
 
-/* Estrellas y texto */
+/* Estrellas */
 body.dark-mode .rating-stars .star {
   color: #fff;
   text-shadow:
@@ -895,11 +825,31 @@ body.dark-mode .rating-stars .star {
     1px 1px 0 #000;
 }
 
-body.dark-mode .rating-stars .star.selected,
-body.dark-mode .rating-stars .star:hover {
-  color: #ffcc00;
-}
-
 body.dark-mode .rating-text {
   color: #bbb;
+}
+/* =================== BOTÓN MODO OSCURO FIJO ABAJO DERECHA =================== */
+.modo-oscuro-btn {
+  position: fixed;          /* Fijo en pantalla */
+  bottom: 20px;             /* Separado del borde inferior */
+  right: 20px;              /* Separado del borde derecho */
+  background-color: #ffcc00;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  z-index: 2000;            /* Siempre visible encima de todo */
+}
+
+.modo-oscuro-btn:hover {
+  background-color: #ffd633;
+  transform: scale(1.1);
 }
