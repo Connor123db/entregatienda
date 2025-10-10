@@ -755,31 +755,6 @@ main {
 /* ------------------------------- FIN SECCION AGREGAR COMENTARIO Y CALIFICACION -----------------------------
 
 /* =================== BOTÓN MODO OSCURO =================== */
-.modo-oscuro-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #ffcc00;
-  color: #222;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  z-index: 1000;
-}
-
-.modo-oscuro-btn:hover {
-  background-color: #ffd633;
-  transform: scale(1.1);
-}
-
-/* =================== MODO OSCURO =================== */
 body.dark-mode {
   background-color: #222;
   color: #f1f1f1;
@@ -801,20 +776,98 @@ body.dark-mode .modo-oscuro-btn {
   background-color: #555;
   color: #ffcc00;
 }
-/* Contenedor principal de comentarios */
+
+/* =================== CUADRO PRINCIPAL DETALLES PRODUCTO =================== */
+body.dark-mode #detalles_productos {
+  background-color: #2a2a2a !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #444;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+/* Fondo general */
+body.dark-mode main {
+  background-color: #1e1e1e;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
+}
+
+/* =================== CUADRO DE IMÁGENES =================== */
+body.dark-mode .imagenes-container {
+  background-color: #2a2a2a;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .miniaturas img {
+  border: 2px solid #555;
+}
+
+body.dark-mode .miniaturas img.active {
+  border-color: #ffcc00;
+  box-shadow: 0 0 8px rgba(255, 204, 0, 0.7);
+}
+
+body.dark-mode .miniaturas img:hover {
+  border-color: #ffcc00;
+}
+
+/* Imagen principal */
+body.dark-mode .imagen-principal-wrapper {
+  background-color: #2a2a2a;
+}
+
+/* =================== CUADRO DE INFORMACIÓN DEL PRODUCTO =================== */
+body.dark-mode .info-container {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode #product-name {
+  color: #ffcc00;
+}
+
+body.dark-mode #product-description {
+  color: #ccc;
+}
+
+body.dark-mode #product-price {
+  color: #ffcc00;
+}
+
+body.dark-mode #product-soldCount {
+  color: #aaa;
+}
+
+/* Botones dentro del cuadro de información */
+body.dark-mode .botones-container button {
+  background-color: #555;
+  color: #ffcc00;
+}
+
+body.dark-mode .botones-container button:hover {
+  background-color: #777;
+  color: #fff;
+}
+
+/* =================== PRODUCTOS RELACIONADOS =================== */
+body.dark-mode #productos-relacionados {
+  background-color: #2a2a2a;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+/* =================== COMENTARIOS =================== */
 body.dark-mode .agregar-Calificacion-Comentario {
   background-color: #2a2a2a;
   color: #f1f1f1;
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Título "Comentarios" o "Agregar calificación" */
 body.dark-mode .agregar-Calificacion-Comentario h2,
 body.dark-mode .agregar-Calificacion-Comentario p {
-  color: #f1f1f1; /* texto claro */
+  color: #f1f1f1;
 }
 
-/* Textarea para escribir comentario */
+/* Textarea */
 body.dark-mode .agregar-Calificacion-Comentario textarea {
   background-color: #3a3a3a;
   color: #fff;
@@ -832,7 +885,7 @@ body.dark-mode .submit-comment-btn:hover {
   color: #fff;
 }
 
-/* Estrellas de calificación */
+/* Estrellas y texto */
 body.dark-mode .rating-stars .star {
   color: #fff;
   text-shadow:
@@ -840,6 +893,11 @@ body.dark-mode .rating-stars .star {
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
+}
+
+body.dark-mode .rating-stars .star.selected,
+body.dark-mode .rating-stars .star:hover {
+  color: #ffcc00;
 }
 
 body.dark-mode .rating-text {
