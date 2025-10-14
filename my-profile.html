@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi perfil</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+      <div class="nav-links">
+        <a href="productos.html">Productos</a>
+        <a href="my-profile.html" class="active">Mi perfil</a>
+        <button id="cerrarSesion" class="logout-btn">Cerrar sesión</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="profile-container">
+    <img id="profileImage" class="profile-pic" src="img/img_perfil.png" alt="Foto de perfil">
+    <div style="margin-bottom: 8px; font-weight: 600; color: #333; font-size: 1.1em;">Foto de perfil</div>
+    <input type="file" id="imageInput" accept="image/*" hidden>
+    <button class="btn-edit-photo" id="editPhotoBtn">Editar Foto</button>
+
+    <form id="profileForm">
+      <label for="firstName">Nombre</label>
+      <input type="text" id="firstName" class="form-control" placeholder="Nombre">
+
+      <label for="lastName">Apellido</label>
+      <input type="text" id="lastName" class="form-control" placeholder="Apellido">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control" placeholder="Email">
+
+      <label for="phone">Teléfono de contacto</label>
+      <input type="tel" id="phone" class="form-control" placeholder="Teléfono de contacto">
+
+      <button type="submit" class="btn-save">Guardar</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a></p>
+  </footer>
+
+  <script src="my-profile.js"></script>
+</body>
+</html>
