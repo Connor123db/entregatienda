@@ -7,6 +7,19 @@ document.getElementById("btnIngresar").addEventListener("click", () => {
     return;
   }
 
+  // Guardar sesión como objeto, email vacío para que lo complete en el perfil
+    const usuarioObj = {
+        nombre: usuario,
+        apellido: "",
+        email: "",
+        telefono: "",
+        fotoPerfil: ""
+    };
+    localStorage.setItem("usuario", JSON.stringify(usuarioObj));
+  
+  // Redirigir a la página de productos
+    window.location.href = "productos.html";
+  
   // ✅ Cuenta especial de administrador (no editable desde crearcuenta)
   if (usuarioIngresado === "admin" && contrasenaIngresada === "admin123") {
     localStorage.setItem("usuario", "admin");
