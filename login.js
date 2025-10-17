@@ -2,25 +2,12 @@ document.getElementById("btnIngresar").addEventListener("click", () => {
   const usuarioIngresado = document.getElementById("usuario").value.trim();
   const contrasenaIngresada = document.getElementById("contrasena").value.trim();
 
-  if (usuarioIngresado === "" || contrasenaIngresada === "") {
+  if (!usuarioIngresado || !contrasenaIngresada) {
     alert("Por favor complete todos los campos");
     return;
   }
 
-  // Guardar sesión como objeto, email vacío para que lo complete en el perfil
-    const usuarioObj = {
-        nombre: usuario,
-        apellido: "",
-        email: "",
-        telefono: "",
-        fotoPerfil: ""
-    };
-    localStorage.setItem("usuario", JSON.stringify(usuarioObj));
-  
-  // Redirigir a la página de productos
-    window.location.href = "productos.html";
-  
-  // ✅ Cuenta especial de administrador (no editable desde crearcuenta)
+  // Cuenta especial de administrador
   if (usuarioIngresado === "admin" && contrasenaIngresada === "admin123") {
     localStorage.setItem("usuario", "admin");
     alert("Bienvenido Administrador");
@@ -28,7 +15,7 @@ document.getElementById("btnIngresar").addEventListener("click", () => {
     return;
   }
 
-  // 🔍 Obtener todas las cuentas guardadas
+  // Obtener cuentas guardadas
   const cuentasGuardadas = JSON.parse(localStorage.getItem("cuentasUsuarios")) || [];
 
   if (cuentasGuardadas.length === 0) {
@@ -45,7 +32,16 @@ document.getElementById("btnIngresar").addEventListener("click", () => {
   );
 
   if (cuentaValida) {
-    localStorage.setItem("usuario", cuentaValida.usuario);
+    // Guardar todos los datos del usuario en localStorage
+    const usuarioObj = {
+      usuario: cuentaValida.usuario,
+      nombre: cuentaValida.nombre || "",    // si no tiene nombre, vacío
+      apellido: cuentaValida.apellido || "",
+      email: cuentaValida.correo,
+      telefono: cuentaValida.telefono || "",
+      fotoPerfil: cuentaValida.fotoPerfil || ""
+    };
+    localStorage.setItem("usuario", JSON.stringify(usuarioObj));
     alert(`Bienvenido, ${cuentaValida.usuario}`);
     window.location.href = "productos.html";
   } else {

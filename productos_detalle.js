@@ -11,8 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cargar la información del producto
         loadProductDetails(productId);
 
-        // Cargar comentarios
+        // Cargar comentarios del servidor y locales
         loadComments(productId);
+        loadLocalComments(productId);
     } else {
         console.error('ID de producto no proporcionado.');
         window.location.href = 'productos.html'; // Redirigir si no hay ID
@@ -155,6 +156,7 @@ function displayRelatedProducts(relatedProducts) {
 
                     // Actualizar comentarios
                     loadComments(product.id);
+                    loadLocalComments(product.id);
 
                     // Actualizar URL (sin recargar)
                     window.history.pushState(null, '', `detalle_productos.html?id=${product.id}`);
@@ -185,13 +187,7 @@ function showComments(comments) {
     container.innerHTML = "";
 
     comments.forEach(c => {
-        container.innerHTML += `
-            <div class="list-group-item">
-                <p><strong>${c.user}</strong> - <small>${c.dateTime}</small></p>
-                <p>${getStars(c.score)}</p>
-                <p>${c.description}</p>
-            </div>
-        `;
+        appendComment(c);
     });
 }
 
@@ -207,47 +203,95 @@ function getStars(score) {
 // --------------------
 // Agregar comentario local (sin API)
 // --------------------
-let calificacionSeleccionada = 1;
+let calificacionSeleccionada = 0;
+const stars = document.querySelectorAll(".rating-stars .star");
+const ratingText = document.querySelector(".rating-text");
+const commentBtn = document.querySelector(".submit-comment-btn");
+const commentsContainer = document.getElementById("comments-container");
 
-// Manejar selección de estrellas
-document.querySelectorAll(".rating-stars .star").forEach(star => {
-    star.addEventListener("click", () => {
-        calificacionSeleccionada = parseInt(star.dataset.value);
-        document.querySelector(".rating-text").textContent =
-            calificacionSeleccionada + " de 5 estrellas";
-
-        // Pintar estrellas seleccionadas
-        document.querySelectorAll(".rating-stars .star").forEach(s => {
-            s.style.color = s.dataset.value <= calificacionSeleccionada ? "gold" : "lightgray";
-        });
+// --- Efecto hover y selección de estrellas ---
+stars.forEach(star => {
+  star.addEventListener("mouseover", () => {
+    stars.forEach(s => {
+      s.style.color = s.dataset.value <= star.dataset.value ? "gold" : "lightgray";
     });
+  });
+
+  star.addEventListener("mouseout", () => {
+    stars.forEach(s => {
+      s.style.color = s.dataset.value <= calificacionSeleccionada ? "gold" : "lightgray";
+    });
+  });
+
+  star.addEventListener("click", () => {
+    calificacionSeleccionada = parseInt(star.dataset.value);
+    ratingText.textContent = `${calificacionSeleccionada} de 5 estrellas`;
+  });
 });
 
-// Enviar nuevo comentario (local)
-document.querySelector(".submit-comment-btn").addEventListener("click", () => {
-    const comentario = document.getElementById("comentarioProducto").value.trim();
+// --- Cargar comentarios guardados ---
+function loadLocalComments(productId) {
+  const stored = JSON.parse(localStorage.getItem(`comments_${productId}`)) || [];
+  stored.forEach(c => appendComment(c));
+}
 
-    if (!comentario) {
-        alert("Por favor escribe un comentario antes de enviar.");
-        return;
-    }
+// --- 🔹 CORRECCIÓN AQUÍ: función para obtener nombre de usuario legible ---
+function getUsuarioDisplayName() {
+  const raw = localStorage.getItem("usuario");
+  if (!raw) return "Tú";
+  try {
+    const obj = JSON.parse(raw);
+    return obj.usuario || obj.nombre || obj.name || "Tú";
+  } catch {
+    return raw;
+  }
+}
 
-    const nuevoComentario = {
-        user: localStorage.getItem("usuario") || "Tú",
-        dateTime: new Date().toISOString().replace("T", " ").split(".")[0],
-        score: calificacionSeleccionada,
-        description: comentario
-    };
+// --- Guardar y mostrar comentario nuevo ---
+commentBtn.addEventListener("click", () => {
+  const comentario = document.getElementById("comentarioProducto").value.trim();
+  const productId = localStorage.getItem("productID");
+  const usuario = getUsuarioDisplayName();
 
-    const container = document.getElementById("comments-container");
-    container.innerHTML += `
-        <div class="list-group-item">
-            <p><strong>${nuevoComentario.user}</strong> - <small>${nuevoComentario.dateTime}</small></p>
-            <p>${getStars(nuevoComentario.score)}</p>
-            <p>${nuevoComentario.description}</p>
-        </div>
-    `;
+  if (!comentario) {
+    alert("Por favor escribe un comentario antes de enviar.");
+    return;
+  }
 
-    // Resetear text
-    document.getElementById("comentarioProducto").value = "";
+  if (calificacionSeleccionada === 0) {
+    alert("Por favor selecciona una cantidad de estrellas.");
+    return;
+  }
+
+  const nuevoComentario = {
+    user: usuario,
+    dateTime: new Date().toISOString().replace("T", " ").split(".")[0],
+    score: calificacionSeleccionada,
+    description: comentario
+  };
+
+  appendComment(nuevoComentario);
+
+  // Guardar en localStorage por producto
+  const existing = JSON.parse(localStorage.getItem(`comments_${productId}`)) || [];
+  existing.push(nuevoComentario);
+  localStorage.setItem(`comments_${productId}`, JSON.stringify(existing));
+
+  // Resetear campos
+  document.getElementById("comentarioProducto").value = "";
+  calificacionSeleccionada = 0;
+  ratingText.textContent = "1 de 5 estrellas";
+  stars.forEach(s => (s.style.color = "lightgray"));
 });
+
+// --- Mostrar comentario en pantalla ---
+function appendComment(c) {
+  const div = document.createElement("div");
+  div.classList.add("list-group-item");
+  div.innerHTML = `
+    <p><strong>${c.user}</strong> - <small>${c.dateTime}</small></p>
+    <p>${getStars(c.score)}</p>
+    <p>${c.description}</p>
+  `;
+  commentsContainer.appendChild(div);
+}

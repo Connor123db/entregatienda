@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const usuario = localStorage.getItem("usuario");
-    if (!usuario) {
-        window.location.href = "index.html";
-    }
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+  if (!usuario || !usuario.usuario) {
+    window.location.href = "index.html"; 
+  }
 });
