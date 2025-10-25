@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cart.css">
+    <title>Carrito de Compras</title>
+    </head>
+<body>
+
+    <div class="contenedor-principal">
+
+        <div class="contenedor-carrito">
+
+            <h1 class="titulo-carrito">Carrito de compras</h1>
+
+            <div id="productos-container">
+                </div>
+            
+            <div class="contenedor-envio">
+                <span class="etiqueta-envio">Envío</span>
+                <span class="costo-envio">Costo de envío</span>
+            </div>
+
+        </div> 
+        <div class="contenedor-resumen">
+
+            <h2 class="titulo-resumen">Resumen de la compra</h2>
+
+            <div class="detalle-linea">
+                <span class="etiqueta">Producto:</span>
+                <span id="resumen-producto-valor" class="valor">$ 0.00</span> 
+            </div>
+            
+            <div class="detalle-linea">
+                <span class="etiqueta">Envío:</span>
+                <span class="valor"></span>
+            </div>
+
+            <div class="detalle-total">
+                <span class="etiqueta-total">Total</span>
+                <span id="resumen-total-valor" class="valor-total">$ 0.00</span> 
+            </div>
+
+            <div class="contenedor-boton">
+                <button class="boton-finalizar">Finalizar compra</button>
+            </div>
+
+        </div> 
+        </div> 
+    <script src="cart.js"></script>
+
+</body>
+</html>

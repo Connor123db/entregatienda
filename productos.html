@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="barra-superior">
+    <span class="empresa">Jóvenes a Programar</span>
+    <input type="text" id="filtro-busqueda" placeholder="Buscar productos...">
+    <div class="dropdown">
+      <button class="dropbtn">Categorías</button>
+      <div class="dropdown-content">
+        <a href="#" onclick="redirigirCategoria(101)">Autos</a>
+        <a href="#" onclick="redirigirCategoria(102)">Juguetes</a>
+        <a href="#" onclick="redirigirCategoria(103)">Muebles</a>
+        <a href="#" onclick="redirigirCategoria(105)">Electrónica</a>
+        <a href="#" onclick="redirigirCategoria(106)">Ropa</a>
+        <a href="#" onclick="redirigirCategoria(107)">Calzados</a>
+        <a href="#" onclick="redirigirCategoria(108)">Hogar</a>
+        <a href="#" onclick="redirigirCategoria(109)">Deportes</a>
+      </div>
+    </div>
+   <!-- mostrar usuario y botones de perfil -->
+    <div class="usuario-info">
+      <span id="usuario-logueado"></span>
+      <a href="my-profile.html" class="btn-perfil">Mi perfil</a>
+      <button id="cerrar-sesion" class="btn-cerrar">Cerrar sesión</button>
+    </div>
+    <!-- mostrar usuario y botones de perfil -->
+  </div> 
+  </div>
+
+  <div class="contenedor-principal">
+    <div class="barra-filtros-orden">
+      <div class="filtros">
+        <span class="filtro-par">
+          <label for="precio-min">Precio mínimo:</label>
+          <input type="number" id="precio-min" placeholder="Mínimo">
+        </span>
+        <span class="filtro-par">
+          <label for="precio-max">Precio máximo:</label>
+          <input type="number" id="precio-max" placeholder="Máximo">
+        </span>
+        <button id="btn-filtrar">Filtrar</button>
+        <button id="btn-limpiar">Limpiar</button>
+      </div>
+      <div class="barra-ordenar">
+        <select id="ordenar">
+          <option value="">Ordenar por...</option>
+          <option value="precio-asc">Precio (menor a mayor)</option>
+          <option value="precio-desc">Precio (mayor a menor)</option>
+          <option value="relevancia">Relevancia (más vendidos)</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="contenedor-productos"></div>
+  </div>
+
+  <div class="paginacion">
+    <button id="btn-anterior">Anterior</button>
+    <span id="pagina-actual"></span>
+    <button id="btn-siguiente">Siguiente</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Jóvenes a Programar. Todos los derechos reservados del Grupo 3.</p>
+  </footer>
+
+  <script src="productos.js"></script>
+  
+  <!-- Iconos (solo una vez en el sitio) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+  <!-- Script global modo oscuro -->
+  <script src="modooscuro.js"></script>
+  
+</body>
+</html>
