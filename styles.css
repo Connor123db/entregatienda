@@ -146,19 +146,20 @@ footer {
     justify-content: center;
     gap: 10px;
     padding: 15px;
-    margin-top: auto; /* Empuja la paginación hacia abajo */}
+    margin-top: auto;
+    margin-bottom: 80px; /* Espacio para el footer */
+}
 
 .paginacion button {
-
     background: #f9b22d;
     color: #111;
     border: none;
     border-radius: 8px;
     padding: 10px 24px;
     font-size: 16px;
-    margin-top: auto;
     cursor: pointer;
     transition: background 0.2s;
+    margin: 0 8px;
 }
 /* =================== SECCIÓN PRODUCTOS =================== */
 .vehiculo {
@@ -423,10 +424,10 @@ main {
 }
 
 .botones-container {
-    gap: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;    
+    align-items: center;
+    gap: 20px;
 }
 
 

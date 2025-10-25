@@ -1,18 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Obtener el ID del producto desde la URL (?id=123)
     const params = new URLSearchParams(window.location.search);
     const productId = params.get('id');
 
     if (productId) {
+        // Guardar en localStorage (sirve para los comentarios y otros usos)
         localStorage.setItem("productID", productId);
+
+        // Cargar la información del producto
         loadProductDetails(productId);
+
+        // Cargar comentarios del servidor y locales
         loadComments(productId);
         loadLocalComments(productId);
     } else {
         console.error('ID de producto no proporcionado.');
-        window.location.href = 'productos.html';
+        window.location.href = 'productos.html'; // Redirigir si no hay ID
     }
 });
 
+// --------------------
+// Cargar detalles del producto
+// --------------------
 function loadProductDetails(productId) {
     const PRODUCT_URL = PRODUCT_INFO_URL + productId + EXT_TYPE;
 
@@ -24,48 +33,48 @@ function loadProductDetails(productId) {
             return response.json();
         })
         .then(productData => {
+            // Mostrar información del producto
             document.getElementById('product-name').textContent = productData.name;
             document.getElementById('product-description').textContent = productData.description;
             document.getElementById('product-price').textContent = `Precio: ${productData.currency} ${productData.cost}`;
             document.getElementById('product-soldCount').textContent = `Vendidos: ${productData.soldCount}`;
 
+            // Cargar imágenes
             loadProductImages(productData.images);
 
             // Botón "Añadir al carrito"
-          // En la función loadProductDetails, modifica el listener del botón:
+            const addBtn = document.getElementById('add-to-cart-btn');
+            if (addBtn) {
+                addBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    try {
+                        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        
+                        const cartItem = {
+                            id: productData.id,
+                            name: productData.name,
+                            unitCost: productData.cost,
+                            currency: productData.currency,
+                            count: 1,
+                            image: productData.images[0]
+                        };
 
-const addBtn = document.getElementById('add-to-cart-btn');
-if (addBtn) {
-    addBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        try {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
-            const cartItem = {
-                id: productData.id,
-                name: productData.name,
-                unitCost: productData.cost,
-                currency: productData.currency,
-                count: 1,
-                image: productData.images[0]
-            };
+                        const existing = cart.find(item => String(item.id) === String(productData.id));
+                        if (existing) {
+                            existing.count++;
+                        } else {
+                            cart.push(cartItem);
+                        }
 
-            const existing = cart.find(item => String(item.id) === String(productData.id));
-            if (existing) {
-                existing.count++;
-            } else {
-                cart.push(cartItem);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        window.location.href = './cart.html';
+                    } catch (error) {
+                        console.error('Error al agregar al carrito:', error);
+                    }
+                });
             }
-
-            localStorage.setItem('cart', JSON.stringify(cart));
-            window.location.href = './cart.html';
-        } catch (error) {
-            console.error('Error al agregar al carrito:', error);
-        }
-    });
-}
 
             // Botón "Comprar"
             const buyBtn = document.getElementById('buy-now-btn');
@@ -76,6 +85,7 @@ if (addBtn) {
                 });
             }
 
+            // Productos relacionados
             if (productData.relatedProducts?.length > 0) {
                 displayRelatedProducts(productData.relatedProducts);
             } else {
@@ -88,6 +98,9 @@ if (addBtn) {
         });
 }
 
+// --------------------
+// Cargar imágenes del producto
+// --------------------
 function loadProductImages(images) {
     const imagenPrincipal = document.getElementById('imagenPrincipal');
     const miniaturas = document.querySelectorAll('.miniaturas img');
@@ -97,9 +110,11 @@ function loadProductImages(images) {
         return;
     }
 
+    // Imagen principal
     imagenPrincipal.src = images[0];
     imagenPrincipal.alt = 'Imagen principal del producto';
 
+    // Miniaturas
     miniaturas.forEach((miniatura, index) => {
         if (images[index]) {
             miniatura.src = images[index];
@@ -109,6 +124,7 @@ function loadProductImages(images) {
             miniatura.style.display = 'none';
         }
 
+        // Evento de click en miniatura
         miniatura.addEventListener('click', () => {
             miniaturas.forEach(img => img.classList.remove('active'));
             miniatura.classList.add('active');
@@ -116,6 +132,7 @@ function loadProductImages(images) {
         });
     });
 
+    // Flechas de navegación
     const prevArrow = document.getElementById('prev-arrow');
     const nextArrow = document.getElementById('next-arrow');
     let currentIndex = 0;
@@ -132,15 +149,20 @@ function loadProductImages(images) {
         });
     }
 
+    // Seleccionar la primera miniatura
     if (miniaturas.length > 0) miniaturas[0].classList.add('active');
 }
 
+// Cambiar imagen principal
 function updateMainImage(index, images, miniaturas, imagenPrincipal) {
     imagenPrincipal.src = images[index];
     miniaturas.forEach(img => img.classList.remove('active'));
     if (miniaturas[index]) miniaturas[index].classList.add('active');
 }
 
+// --------------------
+// Mostrar productos relacionados
+// --------------------
 function displayRelatedProducts(relatedProducts) {
     const relatedProductsContainer = document.getElementById('productos-relacionados');
     relatedProductsContainer.innerHTML = '';
@@ -161,11 +183,17 @@ function displayRelatedProducts(relatedProducts) {
                     </div>
                 `;
 
+                // Click en producto relacionado
                 productDiv.addEventListener('click', () => {
+                    // Cambiar producto principal
                     loadProductDetails(product.id);
                     localStorage.setItem("productID", product.id);
+
+                    // Actualizar comentarios
                     loadComments(product.id);
                     loadLocalComments(product.id);
+
+                    // Actualizar URL (sin recargar)
                     window.history.pushState(null, '', `detalle_productos.html?id=${product.id}`);
                 });
 
@@ -175,6 +203,9 @@ function displayRelatedProducts(relatedProducts) {
     });
 }
 
+// --------------------
+// Cargar comentarios desde API
+// --------------------
 function loadComments(productId) {
     const PRODUCT_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
     const URL_COMMENTS = `${PRODUCT_COMMENTS_URL}${productId}.json`;
@@ -185,6 +216,7 @@ function loadComments(productId) {
         .catch(err => console.error("Error al cargar comentarios:", err));
 }
 
+// Mostrar comentarios en el contenedor
 function showComments(comments) {
     const container = document.getElementById("comments-container");
     if (container) {
@@ -195,6 +227,7 @@ function showComments(comments) {
     }
 }
 
+// Dibujar estrellas
 function getStars(score) {
     let stars = "";
     for (let i = 1; i <= 5; i++) {
@@ -203,12 +236,16 @@ function getStars(score) {
     return stars;
 }
 
+// --------------------
+// Agregar comentario local (sin API)
+// --------------------
 let calificacionSeleccionada = 0;
 const stars = document.querySelectorAll(".rating-stars .star");
 const ratingText = document.querySelector(".rating-text");
 const commentBtn = document.querySelector(".submit-comment-btn");
 const commentsContainer = document.getElementById("comments-container");
 
+// --- Efecto hover y selección de estrellas ---
 if (stars.length > 0) {
     stars.forEach(star => {
         star.addEventListener("mouseover", () => {
@@ -273,10 +310,12 @@ if (commentBtn) {
 
         appendComment(nuevoComentario);
 
+        // Guardar en localStorage por producto
         const existing = JSON.parse(localStorage.getItem(`comments_${productId}`)) || [];
         existing.push(nuevoComentario);
         localStorage.setItem(`comments_${productId}`, JSON.stringify(existing));
 
+        // Resetear campos
         if (document.getElementById("comentarioProducto")) {
             document.getElementById("comentarioProducto").value = "";
         }
