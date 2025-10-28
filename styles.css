@@ -39,7 +39,7 @@ body.fondo-blanco {
 }
 
 /* =================== ESTILOS LOGIN =================== */
-body.login-page {
+body.crearcuenta-page, .login-page {
     display: flex;
     justify-content: center;
     align-items: center;
