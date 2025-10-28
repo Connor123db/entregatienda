@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Configuración de tasa de cambio USD → UYU 
+const USD_TO_UYU = 40;
+
 function loadCartItems() {
   const productosContainer = document.getElementById('productos-container');
   if (!productosContainer) {
@@ -30,23 +33,27 @@ function loadCartItems() {
     const prod = item.product || {};
     const id = String(item.id ?? prod.id ?? idx);
     const name = prod.name || item.name || 'Producto';
-    const price = Number(prod.cost ?? prod.unitCost ?? item.unitCost ?? 0) || 0;
+    const priceOriginal = Number(prod.cost ?? prod.unitCost ?? item.unitCost ?? 0) || 0;
     const currency = prod.currency || item.currency || 'USD';
     const image = (prod.images && prod.images[0]) || item.image || '';
     const count = Number(item.count || 1);
+
+    // Conversión automática de USD a UYU 
+    const priceUYU = currency === 'USD' ? priceOriginal * USD_TO_UYU : priceOriginal;
+    const displayCurrency = 'UYU';
 
     html += `
       <div class="producto-item" data-id="${escapeHtml(id)}">
         <img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" style="width:120px;height:auto;object-fit:cover"/>
         <div class="producto-info">
           <h3>${escapeHtml(name)}</h3>
-          <p>${escapeHtml(currency)} ${price.toFixed(2)}</p>
+          <p>Precio unitario: ${displayCurrency} ${priceUYU.toFixed(2)}</p>
           <p>
             Cantidad:
             <input type="number" min="1" value="${count}" data-id="${escapeHtml(id)}" class="qty-input" style="width:70px"/>
             <button class="btn-remove" data-id="${escapeHtml(id)}" type="button">Eliminar</button>
           </p>
-          <p>Subtotal: ${escapeHtml(currency)} ${(price * count).toFixed(2)}</p>
+          <p class="subtotal">Subtotal: ${displayCurrency} ${(priceUYU * count).toFixed(2)}</p>
         </div>
       </div>
       <hr/>
@@ -57,7 +64,7 @@ function loadCartItems() {
 
   // listeners para inputs de cantidad
   document.querySelectorAll('.qty-input').forEach(inp => {
-    inp.addEventListener('change', (e) => {
+    inp.addEventListener('input', (e) => {
       const id = e.target.dataset.id;
       const val = Math.max(1, parseInt(e.target.value) || 1);
       e.target.value = val;
@@ -76,16 +83,30 @@ function loadCartItems() {
   updateResumen();
 }
 
+// Actualiza la cantidad y el subtotal en tiempo real 
 function updateQuantity(id, newCount) {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   const item = cart.find(it => String(it.id) === String(id) || (it.product && String(it.product.id) === String(id)));
   if (item) {
     item.count = Number(newCount) || 1;
     localStorage.setItem('cart', JSON.stringify(cart));
-    loadCartItems();
+
+    // Actualizar subtotal visualmente sin recargar toda la lista
+    const productoItem = document.querySelector(`.producto-item[data-id="${CSS.escape(id)}"]`);
+    if (productoItem) {
+      const priceText = productoItem.querySelector('p').textContent; // ejemplo: "Precio unitario: UYU 400.00"
+      const price = parseFloat(priceText.replace(/[^\d.]/g, '')) || 0;
+      const nuevoSubtotal = price * item.count;
+      const subtotalElem = productoItem.querySelector('.subtotal');
+      if (subtotalElem) subtotalElem.textContent = `Subtotal: UYU ${nuevoSubtotal.toFixed(2)}`;
+    }
+
+    // Actualiza el resumen general
+    updateResumen();
   }
 }
 
+// Eliminar un producto del carrito
 function removeItem(id) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   cart = cart.filter(it => !(String(it.id) === String(id) || (it.product && String(it.product.id) === String(id))));
@@ -93,26 +114,31 @@ function removeItem(id) {
   loadCartItems();
 }
 
+// Actualizar resumen del carrito
 function updateResumen() {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   let subtotal = 0;
+
   cart.forEach(item => {
     const prod = item.product || {};
-    const price = Number(prod.cost ?? prod.unitCost ?? item.unitCost ?? 0) || 0;
+    const priceOriginal = Number(prod.cost ?? prod.unitCost ?? item.unitCost ?? 0) || 0;
+    const currency = prod.currency || item.currency || 'USD';
+    const priceUYU = currency === 'USD' ? priceOriginal * USD_TO_UYU : priceOriginal;
     const count = Number(item.count || 1);
-    subtotal += price * count;
+    subtotal += priceUYU * count;
   });
 
   const envio = 0; // ajustar si aplica
   const total = subtotal + envio;
+  const totalUSD = total / USD_TO_UYU;
 
   const prodElem = document.getElementById('resumen-producto-valor');
   const envioElem = document.getElementById('resumen-envio-valor');
   const totalElem = document.getElementById('resumen-total-valor');
 
-  if (prodElem) prodElem.textContent = `$ ${subtotal.toFixed(2)}`;
-  if (envioElem) envioElem.textContent = envio ? `$ ${envio.toFixed(2)}` : 'Gratis';
-  if (totalElem) totalElem.textContent = `$ ${total.toFixed(2)}`;
+  if (prodElem) prodElem.textContent = `UYU ${subtotal.toFixed(2)}`;
+  if (envioElem) envioElem.textContent = envio ? `UYU ${envio.toFixed(2)}` : 'Gratis';
+  if (totalElem) totalElem.textContent = `UYU ${total.toFixed(2)} (≈ USD ${totalUSD.toFixed(2)})`;
 }
 
 // helper para escapar texto en HTML
@@ -124,4 +150,5 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;') // luego los signos de mayor
     .replace(/"/g, '&quot;') // luego las comillas dobles
     .replace(/'/g, '&#039;'); // luego las comillas simples
+}
 }
