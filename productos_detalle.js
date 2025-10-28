@@ -77,35 +77,35 @@ function loadProductDetails(productId) {
             }
 
            // Botón "Comprar"
-           const buyBtn = document.getElementById('buy-now-btn');
-           if (buyBtn) {
-               buyBtn.addEventListener('click', (e) => {
-                   e.preventDefault();
+            const buyBtn = document.getElementById('buy-now-btn');
+            if (buyBtn) {
+            buyBtn.addEventListener('click', (e) => {
+            e.preventDefault();
 
-                   try {
-                       // Crear un objeto con la info del producto actual
-                       const productToBuy = {
-                           id: productData.id,
-                           name: productData.name,
-                           unitCost: productData.cost,
-                           currency: productData.currency,
-                           count: 1,
-                           image: productData.images[0]
-                       };
+            try {
+               // Crear un objeto con la info del producto actual
+                  const productToBuy = {
+                id: productData.id,
+                name: productData.name,
+                unitCost: productData.cost,
+                currency: productData.currency,
+                count: 1,
+                image: productData.images[0]
+             };
 
-                       // Guardar la información en localStorage bajo una clave separada
-                       localStorage.setItem('productToBuy', JSON.stringify(productToBuy));
+            // Guardar la información en localStorage bajo una clave separada
+            localStorage.setItem('productToBuy', JSON.stringify(productToBuy));
 
-                       // (Opcional) También lo podés agregar al carrito
-                       // para mantener coherencia con cart.html
-                       localStorage.setItem('cart', JSON.stringify([productToBuy]));
+            // (Opcional) También lo podés agregar al carrito
+            // para mantener coherencia con cart.html
+            localStorage.setItem('cart', JSON.stringify([productToBuy]));
 
-                       // Redirigir directamente al carrito
-                       window.location.href = './cart.html';
-                  } catch (error) {
-                       console.error('Error al procesar la compra:', error);
-                  }
-             });
+            // Redirigir directamente al carrito
+            window.location.href = './cart.html';
+        } catch (error) {
+            console.error('Error al procesar la compra:', error);
+        }
+    });
         }
 
 
