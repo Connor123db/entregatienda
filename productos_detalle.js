@@ -42,16 +42,18 @@ function loadProductDetails(productId) {
             // Cargar imágenes
             loadProductImages(productData.images);
 
-            // Botón "Añadir al carrito"
+            // --------------------
+            // Botón "Añadir al carrito" (solo guarda, sin redirigir)
+            // --------------------
             const addBtn = document.getElementById('add-to-cart-btn');
             if (addBtn) {
                 addBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    
+
                     try {
                         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-                        
+
                         const cartItem = {
                             id: productData.id,
                             name: productData.name,
@@ -69,45 +71,43 @@ function loadProductDetails(productId) {
                         }
 
                         localStorage.setItem('cart', JSON.stringify(cart));
-                        window.location.href = './cart.html';
+
+                        // ✅ Mostrar mensaje de confirmación
+                        alert(`${productData.name} se agregó al carrito 🛒`);
+
                     } catch (error) {
                         console.error('Error al agregar al carrito:', error);
                     }
                 });
             }
 
-           // Botón "Comprar"
+            // --------------------
+            // Botón "Comprar ahora"
+            // --------------------
             const buyBtn = document.getElementById('buy-now-btn');
             if (buyBtn) {
-            buyBtn.addEventListener('click', (e) => {
-            e.preventDefault();
+                buyBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
 
-            try {
-               // Crear un objeto con la info del producto actual
-                  const productToBuy = {
-                id: productData.id,
-                name: productData.name,
-                unitCost: productData.cost,
-                currency: productData.currency,
-                count: 1,
-                image: productData.images[0]
-             };
+                    try {
+                        const productToBuy = {
+                            id: productData.id,
+                            name: productData.name,
+                            unitCost: productData.cost,
+                            currency: productData.currency,
+                            count: 1,
+                            image: productData.images[0]
+                        };
 
-            // Guardar la información en localStorage bajo una clave separada
-            localStorage.setItem('productToBuy', JSON.stringify(productToBuy));
+                        localStorage.setItem('productToBuy', JSON.stringify(productToBuy));
+                        localStorage.setItem('cart', JSON.stringify([productToBuy]));
 
-            // (Opcional) También lo podés agregar al carrito
-            // para mantener coherencia con cart.html
-            localStorage.setItem('cart', JSON.stringify([productToBuy]));
-
-            // Redirigir directamente al carrito
-            window.location.href = './cart.html';
-        } catch (error) {
-            console.error('Error al procesar la compra:', error);
-        }
-    });
-        }
-
+                        window.location.href = './cart.html';
+                    } catch (error) {
+                        console.error('Error al procesar la compra:', error);
+                    }
+                });
+            }
 
             // Productos relacionados
             if (productData.relatedProducts?.length > 0) {
@@ -134,11 +134,9 @@ function loadProductImages(images) {
         return;
     }
 
-    // Imagen principal
     imagenPrincipal.src = images[0];
     imagenPrincipal.alt = 'Imagen principal del producto';
 
-    // Miniaturas
     miniaturas.forEach((miniatura, index) => {
         if (images[index]) {
             miniatura.src = images[index];
@@ -148,7 +146,6 @@ function loadProductImages(images) {
             miniatura.style.display = 'none';
         }
 
-        // Evento de click en miniatura
         miniatura.addEventListener('click', () => {
             miniaturas.forEach(img => img.classList.remove('active'));
             miniatura.classList.add('active');
@@ -156,7 +153,6 @@ function loadProductImages(images) {
         });
     });
 
-    // Flechas de navegación
     const prevArrow = document.getElementById('prev-arrow');
     const nextArrow = document.getElementById('next-arrow');
     let currentIndex = 0;
@@ -173,11 +169,9 @@ function loadProductImages(images) {
         });
     }
 
-    // Seleccionar la primera miniatura
     if (miniaturas.length > 0) miniaturas[0].classList.add('active');
 }
 
-// Cambiar imagen principal
 function updateMainImage(index, images, miniaturas, imagenPrincipal) {
     imagenPrincipal.src = images[index];
     miniaturas.forEach(img => img.classList.remove('active'));
@@ -207,17 +201,11 @@ function displayRelatedProducts(relatedProducts) {
                     </div>
                 `;
 
-                // Click en producto relacionado
                 productDiv.addEventListener('click', () => {
-                    // Cambiar producto principal
                     loadProductDetails(product.id);
                     localStorage.setItem("productID", product.id);
-
-                    // Actualizar comentarios
                     loadComments(product.id);
                     loadLocalComments(product.id);
-
-                    // Actualizar URL (sin recargar)
                     window.history.pushState(null, '', `detalle_productos.html?id=${product.id}`);
                 });
 
@@ -240,7 +228,6 @@ function loadComments(productId) {
         .catch(err => console.error("Error al cargar comentarios:", err));
 }
 
-// Mostrar comentarios en el contenedor
 function showComments(comments) {
     const container = document.getElementById("comments-container");
     if (container) {
@@ -251,7 +238,6 @@ function showComments(comments) {
     }
 }
 
-// Dibujar estrellas
 function getStars(score) {
     let stars = "";
     for (let i = 1; i <= 5; i++) {
@@ -260,16 +246,12 @@ function getStars(score) {
     return stars;
 }
 
-// --------------------
-// Agregar comentario local (sin API)
-// --------------------
 let calificacionSeleccionada = 0;
 const stars = document.querySelectorAll(".rating-stars .star");
 const ratingText = document.querySelector(".rating-text");
 const commentBtn = document.querySelector(".submit-comment-btn");
 const commentsContainer = document.getElementById("comments-container");
 
-// --- Efecto hover y selección de estrellas ---
 if (stars.length > 0) {
     stars.forEach(star => {
         star.addEventListener("mouseover", () => {
@@ -334,12 +316,10 @@ if (commentBtn) {
 
         appendComment(nuevoComentario);
 
-        // Guardar en localStorage por producto
         const existing = JSON.parse(localStorage.getItem(`comments_${productId}`)) || [];
         existing.push(nuevoComentario);
         localStorage.setItem(`comments_${productId}`, JSON.stringify(existing));
 
-        // Resetear campos
         if (document.getElementById("comentarioProducto")) {
             document.getElementById("comentarioProducto").value = "";
         }
