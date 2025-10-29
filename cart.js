@@ -151,4 +151,4 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;') // luego las comillas dobles
     .replace(/'/g, '&#039;'); // luego las comillas simples
 }
-}
+
