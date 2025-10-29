@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del Producto</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <main>
+    <div id="productos_detalle">
+      <div class="top-section">
+        <div class="imagenes-container">
+          <div class="miniaturas">
+            <img id="miniatura1" src="" alt="Miniatura 1">
+            <img id="miniatura2" src="" alt="Miniatura 2">
+            <img id="miniatura3" src="" alt="Miniatura 3">
+            <img id="miniatura4" src="" alt="Miniatura 4">
+          </div>
+          <div class="imagen-principal-wrapper">
+            <button class="arrow" id="prev-arrow">&lt;</button>
+            <img id="imagenPrincipal" src="" alt="Imagen principal">
+            <button class="arrow" id="next-arrow">&gt;</button>
+          </div>
+        </div>
+
+        <div class="agregar-Calificacion-Comentario">
+          <h3>Comentarios</h3>
+          <div id="comments-container" class="list-group"></div>
+
+          <h2>Calificar este producto</h2>
+          <p>Tu calificación</p>
+          <div class="rating-info-container">
+            <div class="rating-stars">
+              <span class="star" data-value="1">★</span>
+              <span class="star" data-value="2">★</span>
+              <span class="star" data-value="3">★</span>
+              <span class="star" data-value="4">★</span>
+              <span class="star" data-value="5">★</span>
+            </div>
+            <span class="rating-text">1 de 5 estrellas</span>
+          </div>
+
+          <p>Tu comentario</p>
+          <textarea id="comentarioProducto" name="comentario" rows="5" cols="50" placeholder="Comparte tu experiencia con este producto..."></textarea>
+          <button class="submit-comment-btn">Enviar calificación</button>
+        </div>
+
+        <div class="productos-relacionados-container">
+          <div class="productos-relacionados" id="productos-relacionados"></div>
+        </div>
+      </div>
+
+      <div class="info-container">
+        <h2 id="product-name"></h2>
+        <p id="product-description"></p>
+        <p id="product-price"></p>
+        <p id="product-soldCount"></p>
+
+        <div class="botones-container">
+          <button id="add-to-cart-btn" class="btn">Agregar al Carrito</button>
+          <button id="buy-now-btn" class="btn">Comprar</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="init.js"></script> 
+  <script src="productos_detalle.js"></script>
+
+  <!-- Iconos (solo una vez en el sitio) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+  <!-- Script global modo oscuro -->
+  <script src="modooscuro.js"></script>
+  
+  <!-- Boton carrito -->
+  <link rel="stylesheet" href="cartBadge.css">
+  <script src="cartBadge.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+</body>
+</html>

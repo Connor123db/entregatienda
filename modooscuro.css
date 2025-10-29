@@ -1,0 +1,99 @@
+/* =================== MODO OSCURO (CUADROS NEGROS) =================== */
+body.dark-mode {
+  background-color: #222;
+  color: #f1f1f1;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #1a1a1a;
+}
+
+body.dark-mode input,
+body.dark-mode select {
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #777;
+}
+
+body.dark-mode .modo-oscuro-btn {
+  background-color: #555;
+  color: #ffcc00;
+}
+
+/* Cuadros principales en negro */
+body.dark-mode .info-container,
+body.dark-mode .imagenes-container,
+body.dark-mode #productos-relacionados,
+body.dark-mode .agregar-Calificacion-Comentario {
+  background-color: #111; /* negro profundo */
+  color: #f1f1f1;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.08);
+}
+
+/* Títulos y textos */
+body.dark-mode .agregar-Calificacion-Comentario h2,
+body.dark-mode .agregar-Calificacion-Comentario p,
+body.dark-mode .info-container h1,
+body.dark-mode #product-name,
+body.dark-mode #product-description,
+body.dark-mode #product-price {
+  color: #f1f1f1;
+}
+
+/* Textarea */
+body.dark-mode .agregar-Calificacion-Comentario textarea {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+/* Botón de enviar */
+body.dark-mode .submit-comment-btn {
+  background-color: #333;
+  color: #ffcc00;
+}
+
+body.dark-mode .submit-comment-btn:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+/* Estrellas */
+body.dark-mode .rating-stars .star {
+  color: #fff;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+body.dark-mode .rating-text {
+  color: #bbb;
+}
+/* =================== BOTÓN MODO OSCURO FIJO ABAJO DERECHA =================== */
+.modo-oscuro-btn {
+  position: fixed;          /* Fijo en pantalla */
+  bottom: 20px;             /* Separado del borde inferior */
+  right: 20px;              /* Separado del borde derecho */
+  background-color: #ffcc00;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  z-index: 2000;            /* Siempre visible encima de todo */
+}
+
+.modo-oscuro-btn:hover {
+  background-color: #ffd633;
+  transform: scale(1.1);
+}

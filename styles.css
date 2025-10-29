@@ -1,0 +1,1210 @@
+/* =================== ESTILOS GENERALES Y LAYOUT =================== */
+body {
+    font-family: 'Poppins', Arial, sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana;
+    background-color: #fef3e2; /* Fondo principal */
+    color: #333;
+    margin: 0;
+    padding-top: 60px; /* Para la barra superior fija */
+    text-align: center;
+}
+
+/* Estilo que se añade a la clase del body para el fondo blanco */
+body.fondo-blanco {
+    background-color: #ffffff;
+    transition: background-color 1s ease-in-out;
+}
+
+/* Contenedores principales */
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.galeria-vehiculos {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+/* Se mantiene la clase 'boton-group' para agrupar los botones */
+.boton-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* =================== ESTILOS LOGIN =================== */
+body.crearcuenta-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 0;
+    margin: 0;
+}
+
+.login-container {
+    width: 400px;
+    padding: 40px 30px;
+    background: #f9b22d; /* Naranja */
+    border-radius: 16px;
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.login-container h2 {
+    font-weight: 800;
+    font-size: 32px;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+.login-container input {
+    width: 90%;
+    height: 50px;
+    background: #37526c;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 18px;
+    padding: 0 15px;
+    margin-bottom: 20px;
+}
+
+.login-container button {
+    width: 100%;
+    height: 50px;
+    background: #36320A;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 23px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.login-container button:hover {
+    background: #37526c;
+}
+
+
+
+/* =================== NAVEGACIÓN Y FOOTER =================== */
+.barra-superior {
+    width: 100%;
+    height: 60px;
+    background: #37526c;
+    color: #fef3e2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+.barra-superior #filtro-busqueda {
+width: 30%;
+height: 30px; 
+border: 3px solid #f9b22d;
+border-radius: 5px;
+}
+.barra-superior .empresa {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.barra-superior .usuario {
+    font-size: 18px;
+    font-weight: 500;
+    color: #fef3e2;
+}
+
+footer {
+    width: 100%;
+    background: #37526c;
+    color: #fef3e2;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+}
+
+/* =================== PAGINACIÓN =================== */
+.paginacion {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    margin-top: auto;
+    margin-bottom: 80px; /* Espacio para el footer */
+}
+
+.paginacion button {
+    background: #f9b22d;
+    color: #111;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin: 0 8px;
+}
+/* =================== SECCIÓN PRODUCTOS =================== */
+.vehiculo {
+    position: relative;
+    width: 280px;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.vehiculo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.vehiculo:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.vehiculo:hover img {
+    transform: scale(1.1);
+}
+
+.info-vehiculo {
+    opacity: 0; /* Por defecto, la información está oculta */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 15px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease;
+}
+
+/* Botones y filtros */
+.barra-filtros-orden {
+    width: 100%;
+    max-width: 900px;
+    margin: 24px auto 18px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.filtros, .barra-ordenar {
+    background: #37526c;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 15px;
+    flex-wrap: nowrap;
+    gap: 12px;
+}
+
+.filtro-par {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+}
+
+.filtros label {
+    color: #fff;
+    font-weight: 500;
+    margin-right: 2px;
+    font-size: 15px;
+}
+
+.filtros input[type="number"],
+.barra-ordenar select {
+    width: auto; /* El ancho se ajustará automáticamente al contenido */
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    padding: 0 10px; /* Padding ajustado para más espacio */
+    font-size: 15px;
+    background: #f9b22d;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.filtros input[type="number"]::placeholder {
+    color: #fff8;
+    font-size: 14px;
+}
+
+.filtros button {
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    padding: 0 12px;
+    font-size: 15px;
+    background: #f9b22d;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 2px;
+    transition: background 0.2s;
+}
+
+.filtros button:hover,
+.barra-ordenar select:hover,
+.barra-ordenar select:focus {
+    background: #0f5ea8;
+    outline: none;
+}
+
+
+/* =================== DETALLE PRODUCTOS =================== */
+h1 {
+    text-align: center;
+    color: #333;
+    padding: 30px 0 20px 0;
+    font-size: 2.5em;
+    font-weight: 600;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+    gap: 40px;
+    background-color: #37526c;
+    margin: 20px auto;
+    max-width: 1300px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.imagenes-container {
+    display: flex;
+    gap: 20px;
+    background-color: #fef3e2;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 0 0 auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.miniaturas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.miniaturas img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 3px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.miniaturas img.active {
+    border-color: #fef3e2;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+
+.miniaturas img:hover {
+    border-color: #004b9b;
+    transform: scale(1.08);
+}
+
+.imagen-principal-wrapper {
+    position: relative;
+    width: 550px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+#imagenPrincipal {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 1.8em;
+    z-index: 10;
+    border-radius: 50%;
+    line-height: 1;
+    transition: background-color 0.2s ease;
+}
+
+#prev-arrow { left: 15px; }
+#next-arrow { right: 15px; }
+
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.info-container {
+    flex: 1;
+    background-color: #fef3e2; 
+    padding: 70px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); 
+    display: flex;
+    flex-direction: column;
+    gap: 0,5px; 
+}
+
+#product-name {
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #212529;
+    font-weight: 700;
+}
+
+#product-description {
+    font-size: 1em;
+    line-height: 1.5;
+    color: #37526c;
+}
+
+#product-price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #37526c;
+}
+
+#product-soldCount {
+    font-size: 0.9em;
+    color: #bdbdbd;
+    text-align: center;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.botones-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.botones-container button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 500px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    background-color: #403a34;
+    color: #fff;
+}
+
+#add-to-cart-btn:hover, #buy-now-btn:hover {
+    background-color: #37526c;
+    color: #333;
+}
+/* =================== DROPDOWN Y BOTONES GENÉRICOS =================== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: -300px;
+}
+
+.dropbtn {
+    background-color: #444;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #666;
+}
+
+.boton {
+    background: #f9b22d;
+    color: #000000;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 32px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.boton:hover {
+    background: #fef3e2;
+    color: #000000;
+    transform: translateY(-2px) scale(1.04);
+}
+/* =================== RESPONSIVE =================== */
+@media screen and (max-width: 1024px) {
+    /* Login */
+    body.login-page { padding: 20px; }
+    .login-container { width: 70%; padding: 30px 20px; }
+    .login-container h2 { font-size: 28px; }
+    .login-container input, .login-container button { font-size: 18px; height: 48px; }
+
+    /* Productos */
+    .galeria-vehiculos { gap: 20px; justify-content: space-around; }
+    .vehiculo { width: 45%; height: 200px; }
+    .barra-superior { padding: 0 30px; }
+    .barra-filtros-orden { flex-direction: column; align-items: stretch; gap: 10px; }
+    .barra-ordenar, .filtros { width: 100%; justify-content: center; }
+    .barra-ordenar { justify-content: flex-end; }
+    .filtros { flex-wrap: wrap; gap: 8px; }
+}
+
+@media screen and (max-width: 992px) {
+    /* Detalle Producto */
+    main { flex-direction: column; align-items: center; gap: 30px; padding: 20px; }
+    .imagenes-container { flex-direction: column; align-items: center; }
+    .imagen-principal-wrapper { width: 100%; height: auto; max-width: 500px; }
+    .miniaturas { flex-direction: row; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 500px; }
+    .miniaturas img { width: 70px; height: 70px; }
+}
+
+@media screen and (max-width: 576px) {
+    /* Detalle Producto */
+    h1 { font-size: 2em; }
+    main { padding: 15px; gap: 20px; }
+    .imagenes-container { padding: 10px; }
+    .imagen-principal-wrapper { height: 250px; }
+    .info-container { padding: 20px; gap: 10px; }
+    #product-name { font-size: 1.8em; }
+    #product-description, #product-price, .botones-container button { font-size: 1em; }
+    #product-price { font-size: 1.8em; }
+    .botones-container { flex-direction: column; align-items: stretch; margin-top: 20px; }
+    .botones-container button { padding: 10px 20px; }
+    .arrow { padding: 8px 12px; font-size: 1.5em; }
+    #prev-arrow { left: 5px; }
+    #next-arrow { right: 5px; }
+}
+
+@media screen and (max-width: 568px) {
+    /* Login */
+    .login-container { width: 90%; padding: 25px 15px; }
+    .login-container h2 { font-size: 24px; margin-bottom: 20px; }
+    .login-container input, .login-container button { font-size: 16px; height: 44px; }
+    .login-container button { border-radius: 20px; font-size: 18px; }
+
+    /* Productos */
+    .galeria-vehiculos { flex-direction: column; align-items: center; }
+    .vehiculo { width: 100%; max-width: 300px; height: 200px; }
+    .info-vehiculo { opacity: 1; position: static; border-radius: 0; }
+    .vehiculo:hover { transform: none; }
+    .barra-superior { padding: 0 20px; }
+    .barra-superior .empresa { font-size: 18px; }
+    .barra-superior .usuario { font-size: 14px; text-align: right; }
+}
+
+/* =================== DETALLE PRODUCTOS =================== */
+
+/* Contenedor principal: apila los elementos verticalmente */
+main {
+    display: flex;
+    flex-direction: column; /* Apila .top-section y .productos-relacionados-seccion */
+    align-items: center; /* Centra el contenido */
+    padding: 2%;
+    background-color: #37526c;
+    margin: 20px auto;
+    max-width: 1300px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor superior (secciones verde y roja): las coloca en fila */
+.top-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    gap: 40px; /* Espacio entre las secciones de imágenes y de info */
+}
+
+
+/* Contenedor de imágenes (cuadro verde) */
+.imagenes-container {
+    flex: 1; /* Permite que este contenedor crezca */
+    background-color: #fef3e2;
+    padding: 100px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex; /* Nuevo: para alinear las miniaturas y la imagen principal */
+    gap: 20px;
+}
+
+/* Contenedor de información (cuadro rojo) */
+.info-container {
+    gap: 80px; /* Espacio entre los elementos dentro del contenedor */
+    height: 100%;
+    flex: 1; /* Permite que este contenedor crezca */
+    background-color: #fef3e2; 
+    padding: 100px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); 
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo para los productos individuales dentro de la sección de relacionados */
+#productos-relacionados {
+    background-color: #fef3e2;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row; /* Para mostrar los productos en una fila */
+    justify-content: center; /* Centra los productos horizontalmente */
+    align-items: center; /* Centra los productos verticalmente */
+    flex-wrap: wrap; /* Permite que los productos pasen a una nueva línea si no hay espacio */
+    gap: 40px; /* Espacio entre los productos */
+    width: 92%; /* Ocupa casi todo el ancho del contenedor principal */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+    padding: 80px; /* Espacio interno */
+    margin-top: 10px; /* Espacio superior */
+}
+
+
+#productos_detalle {
+    height: 100%; 
+    flex: 1; 
+    background-color: #37526c;
+    display: flex; 
+    gap: 40px;
+}
+
+
+/* ------------------------------ AGREGAR COMENTARIOS Y CALIFICACIONES  ----------------------------------------
+
+/* 1. Estilos para el contenedor de agregar calificación y comentario */
+.agregar-Calificacion-Comentario {
+    background-color: #fef3e2; 
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra un poco más pronunciada */
+    
+    padding: 30px; /* Un poco más de espacio interno */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los bloques */
+    
+    width: 94%; 
+    max-width: none; 
+    margin: 20px 0;
+}
+
+.agregar-Calificacion-Comentario h2 {
+    text-align: left;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+/* Estilos para los textos "Tu calificación" y "Tu comentario" */
+.agregar-Calificacion-Comentario p {
+    text-align: left;
+    font-weight: bold; 
+    margin: 0; 
+}
+
+/* 2. Estilos para el contenedor de la calificación */
+.rating-info-container { /* Nueva clase para agrupar estrellas y texto */
+    display: flex;
+    align-items: center; /* Centra verticalmente estrellas y texto */
+    gap: 10px; /* Espacio entre las estrellas y el texto "1 de 5 estrellas" */
+    margin-bottom: 10px; /* Separación del comentario */
+}
+
+.rating-stars {
+    display: flex; 
+    gap: 3px; 
+    font-size: 28px; 
+}
+
+.rating-stars .star {
+    cursor: pointer;
+    /* Usa el color blanco para el "relleno" cuando están vacías */
+    color: #ffffff; 
+    
+    /* Propiedad clave: text-shadow para simular el contorno oscuro */
+    text-shadow: 
+        -1px -1px 0 #333, /* Arriba-izquierda */
+        1px -1px 0 #333,  /* Arriba-derecha */
+        -1px 1px 0 #333,  /* Abajo-izquierda */
+        1px 1px 0 #333;   /* Abajo-derecha */
+    
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+/* 2. Estilo para Estrellas Seleccionadas (Amarillo) */
+
+/* Si están seleccionadas cambian a color amarillo */
+.rating-stars .star.selected, 
+.rating-stars .star:hover { /* El estado hover sigue siendo importante */
+    color: hsl(57, 99%, 51%);
+    }
+
+/* Estilo para el texto "1 de 5 estrellas" */
+.rating-text { /* Nueva clase para el texto */
+    color: #948f8f; /* Un gris claro para el texto de calificación */
+    font-size: 1em;
+}
+
+
+/* 3. Estilos para el campo de comentario */
+.agregar-Calificacion-Comentario textarea {
+    padding: 15px; /* Un poco más de padding */
+    border: 1px solid #555; /* Borde más oscuro */
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    font-size: 16px;
+    resize: vertical; 
+    width: 100%; 
+    box-sizing: border-box; 
+    color: #333; /* Color de texto oscuro dentro del textarea */
+    min-height: 120px; /* Altura mínima para el textarea */
+}
+
+/* 4. Estilos para el botón de enviar */
+.submit-comment-btn {
+    background-color: #4b4e52; /* Color gris muy oscuro para el botón */
+    color: white;
+    padding: 12px 20px; /* Más padding para que sea más grande */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.15em; /* Fuente un poco más grande */
+    transition: background-color 0.3s ease;
+    width: 100%; /* Ocupa todo el ancho */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+    margin-top: 15px; /* Más espacio arriba del botón */
+}
+
+.submit-comment-btn:hover {
+    background-color: #5a5e62; /* Un poco más claro al pasar el ratón */
+}
+
+/* ------------------------------- FIN SECCION AGREGAR COMENTARIO Y CALIFICACION -----------------------------
+
+/* =================== MODO OSCURO (CUADROS NEGROS) =================== */
+body.dark-mode {
+  background-color: #222;
+  color: #f1f1f1;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #1a1a1a;
+}
+
+body.dark-mode input,
+body.dark-mode select {
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #777;
+}
+
+body.dark-mode .modo-oscuro-btn {
+  background-color: #555;
+  color: #ffcc00;
+}
+
+/* Cuadros principales en negro */
+body.dark-mode .info-container,
+body.dark-mode .imagenes-container,
+body.dark-mode #productos-relacionados,
+body.dark-mode .agregar-Calificacion-Comentario {
+  background-color: #111; /* negro profundo */
+  color: #f1f1f1;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.08);
+}
+
+/* Títulos y textos */
+body.dark-mode .agregar-Calificacion-Comentario h2,
+body.dark-mode .agregar-Calificacion-Comentario p,
+body.dark-mode .info-container h1,
+body.dark-mode #product-name,
+body.dark-mode #product-description,
+body.dark-mode #product-price {
+  color: #f1f1f1;
+}
+
+/* Textarea */
+body.dark-mode .agregar-Calificacion-Comentario textarea {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+/* Botón de enviar */
+body.dark-mode .submit-comment-btn {
+  background-color: #333;
+  color: #ffcc00;
+}
+
+body.dark-mode .submit-comment-btn:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+/* Estrellas */
+body.dark-mode .rating-stars .star {
+  color: #fff;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+body.dark-mode .rating-text {
+  color: #bbb;
+}
+/* =================== BOTÓN MODO OSCURO FIJO ABAJO DERECHA =================== */
+.modo-oscuro-btn {
+  position: fixed;          /* Fijo en pantalla */
+  bottom: 20px;             /* Separado del borde inferior */
+  right: 20px;              /* Separado del borde derecho */
+  background-color: #ffcc00;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  z-index: 2000;            /* Siempre visible encima de todo */
+}
+
+.modo-oscuro-btn:hover {
+  background-color: #ffd633;
+  transform: scale(1.1);
+}
+/* =================== ENLACE CREAR CUENTA =================== */
+.crear-cuenta-texto {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+  color: #555;
+}
+
+.link-crear-cuenta {
+  color: #007bff; /* Azul brillante */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link-crear-cuenta:hover {
+  text-decoration: underline;
+  color: #0056b3; /* Azul más oscuro al pasar el mouse */
+}
+/* =================== PANEL ADMIN =================== */
+.admin-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#tablaUsuarios {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#tablaUsuarios th, #tablaUsuarios td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+#tablaUsuarios th {
+  background-color: #007bff;
+  color: white;
+}
+
+.btnBorrar {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.btnBorrar:hover {
+  background-color: #c82333;
+}
+
+#btnCerrarSesion {
+  float: right;
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+#btnCerrarSesion:hover {
+  background-color: #333;
+}
+
+
+
+/* === PERFIL === */
+body {
+  background-color: #faeed1;
+  font-family: 'Raleway', sans-serif;
+}
+
+.profile-container {
+  max-width: 450px;
+  margin: 60px auto;
+  background-color: #fff3e0;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #999;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.btn-edit-photo {
+  background-color: #f5b301;
+  color: #000;
+  border: none;
+  padding: 6px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.form-control {
+  border-radius: 10px;
+  background-color: #27374D;
+  color: #fff;
+  text-align: center;
+  border: none;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.btn-save {
+  background-color: #f5b301;
+  border: none;
+  padding: 10px 35px;
+  border-radius: 10px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  background-color: #e2a500;
+}
+
+/* === BOTONES PERFIL EN PRODUCTOS === */
+.usuario-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-perfil, .btn-cerrar {
+  background-color: #f5b301;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-cerrar {
+  background-color: #c0392b;
+  color: white;
+}
+
+.btn-cerrar:hover {
+  background-color: #a93226;
+}
+
+/* =================== ESTILOS PERFIL USUARIO =================== */
+body {
+  background: #f9f1dc;
+  font-family: 'Raleway', sans-serif;
+}
+
+.profile-container {
+  max-width: 400px;
+  margin: 40px auto;
+  background: #fff3e0;
+  border-radius: 20px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  padding: 32px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #bdbdbd;
+  object-fit: cover;
+  margin-bottom: 12px;
+  background: #fff;
+}
+
+.btn-edit-photo {
+  background: #f9b22d;
+  color: #333;
+  border: none;
+  border-radius: 14px;
+  padding: 8px 24px;
+  font-weight: 600;
+  font-size: 1.15em;
+  margin-bottom: 24px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.2s;
+}
+.btn-edit-photo:hover {
+  background: #e6a11c;
+}
+
+#profileForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#profileForm label {
+  background: #f9b22d;
+  color: #333;
+  font-weight: 700;
+  font-size: 0.95em;
+  border-radius: 8px;
+  padding: 4px 16px;
+  margin-bottom: 6px;
+  margin-top: 10px;
+  align-self: center;
+  box-shadow: none;
+}
+
+.form-control {
+  width: 100%;
+  max-width: 260px;
+  background: #3c4a5b;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 16px;
+  font-size: 1em;
+  margin-bottom: 8px;
+  outline: none;
+  box-sizing: border-box;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.form-control:read-only {
+  background: #3c4a5b;
+  opacity: 0.7;
+}
+
+.btn-save {
+  background: #f9b22d;
+  color: #333;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 32px;
+  font-weight: 700;
+  font-size: 1.1em;
+  margin-top: 18px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.2s;
+}
+.btn-save:hover {
+  background: #e6a11c;
+}
+
+/* Responsive para mobile */
+@media (max-width: 600px) {
+  .profile-container {
+    max-width: 95vw;
+    padding: 18px 8px;
+  }
+  .form-control {
+    max-width: 95vw;
+  }
+}
+
+/* =================== NUEVA NAVEGACIÓN =================== */
+.navbar {
+  width: 100%;
+  background: #37526c;
+  color: #fef3e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0 40px;
+  box-sizing: border-box;
+  height: 60px;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #f9b22d;
+  text-decoration: none;
+  margin-right: 30px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-links a,
+.logout-btn {
+  background: #f9b22d;
+  color: #333;
+  border: none;
+  border-radius: 14px;
+  padding: 8px 18px;
+  font-weight: 600;
+  font-size: 1em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.2s;
+}
+
+.nav-links a.active,
+.nav-links a:hover,
+.logout-btn:hover {
+  background: #e6a11c;
+  color: #222;
+}
+
+.profile-container {
+  margin-bottom: 80px; 
+}
