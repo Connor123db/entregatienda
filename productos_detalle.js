@@ -43,7 +43,7 @@ function loadProductDetails(productId) {
             loadProductImages(productData.images);
 
             // --------------------
-            // Botón "Añadir al carrito" (solo guarda, sin redirigir)
+            // Botón "Añadir al carrito"
             // --------------------
             const addBtn = document.getElementById('add-to-cart-btn');
             if (addBtn) {
@@ -72,7 +72,7 @@ function loadProductDetails(productId) {
 
                         localStorage.setItem('cart', JSON.stringify(cart));
 
-                        // ✅ Mostrar mensaje de confirmación
+                        // ✅ Mensaje de confirmación
                         alert(`${productData.name} se agregó al carrito 🛒`);
 
                     } catch (error) {
@@ -99,10 +99,25 @@ function loadProductDetails(productId) {
                             image: productData.images[0]
                         };
 
-                        localStorage.setItem('productToBuy', JSON.stringify(productToBuy));
-                        localStorage.setItem('cart', JSON.stringify([productToBuy]));
+                        // ✅ Recuperar carrito existente sin borrar
+                        const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+                        const existing = cart.find(item => String(item.id) === String(productData.id));
+                        if (existing) {
+                            existing.count++;
+                        } else {
+                            cart.push(productToBuy);
+                        }
+
+                        // Guardar carrito actualizado
+                        localStorage.setItem('cart', JSON.stringify(cart));
+
+                        // Guardar producto seleccionado
+                        localStorage.setItem('productToBuy', JSON.stringify(productToBuy));
+
+                        // Redirigir al carrito
                         window.location.href = './cart.html';
+
                     } catch (error) {
                         console.error('Error al procesar la compra:', error);
                     }
