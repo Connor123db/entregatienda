@@ -73,9 +73,8 @@ if (addBtn) {
             // 1. Guardas el carrito actualizado
             localStorage.setItem('cart', JSON.stringify(cart));
 
-            // 2. ¡AÑÁDELO AQUÍ! Llama a la función para actualizar el badge flotante
-            // Esta función debe estar definida en el scope global o accesible
-            // (Como la exportaste con window.updateCartBadge en el código anterior)
+            // 2. Llamar a la función para actualizar el badge flotante
+
             if (window.updateCartBadge) {
                 window.updateCartBadge(); 
             }
