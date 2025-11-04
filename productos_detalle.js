@@ -42,44 +42,52 @@ function loadProductDetails(productId) {
             // Cargar imágenes
             loadProductImages(productData.images);
 
-            // --------------------
-            // Botón "Añadir al carrito"
-            // --------------------
-            const addBtn = document.getElementById('add-to-cart-btn');
-            if (addBtn) {
-                addBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
+           // --------------------
+// Botón "Añadir al carrito"
+// --------------------
+const addBtn = document.getElementById('add-to-cart-btn');
+if (addBtn) {
+    addBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
 
-                    try {
-                        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        try {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-                        const cartItem = {
-                            id: productData.id,
-                            name: productData.name,
-                            unitCost: productData.cost,
-                            currency: productData.currency,
-                            count: 1,
-                            image: productData.images[0]
-                        };
+            const cartItem = {
+                id: productData.id,
+                name: productData.name,
+                unitCost: productData.cost,
+                currency: productData.currency,
+                count: 1,
+                image: productData.images[0]
+            };
 
-                        const existing = cart.find(item => String(item.id) === String(productData.id));
-                        if (existing) {
-                            existing.count++;
-                        } else {
-                            cart.push(cartItem);
-                        }
-
-                        localStorage.setItem('cart', JSON.stringify(cart));
-
-                        // ✅ Mensaje de confirmación
-                        alert(`${productData.name} se agregó al carrito 🛒`);
-
-                    } catch (error) {
-                        console.error('Error al agregar al carrito:', error);
-                    }
-                });
+            const existing = cart.find(item => String(item.id) === String(productData.id));
+            if (existing) {
+                existing.count++;
+            } else {
+                cart.push(cartItem);
             }
+
+            // 1. Guardas el carrito actualizado
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // 2. ¡AÑÁDELO AQUÍ! Llama a la función para actualizar el badge flotante
+            // Esta función debe estar definida en el scope global o accesible
+            // (Como la exportaste con window.updateCartBadge en el código anterior)
+            if (window.updateCartBadge) {
+                window.updateCartBadge(); 
+            }
+
+            // ✅ Mensaje de confirmación
+            alert(`${productData.name} se agregó al carrito 🛒`);
+
+        } catch (error) {
+            console.error('Error al agregar al carrito:', error);
+        }
+    });
+}
 
             // --------------------
             // Botón "Comprar ahora"
