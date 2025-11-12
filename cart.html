@@ -5,26 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="cart.css">
     <title>Carrito de Compras</title>
-    </head>
+</head>
 <body>
 
     <div class="contenedor-principal">
 
         <div class="contenedor-carrito">
-
             <h1 class="titulo-carrito">Carrito de compras</h1>
 
             <div id="productos-container">
-                </div>
+                <!-- Aquí se muestran los productos del carrito -->
+            </div>
             
             <div class="contenedor-envio">
                 <span class="etiqueta-envio">Envío</span>
                 <span class="costo-envio">Costo de envío</span>
             </div>
-
         </div> 
-        <div class="contenedor-resumen">
 
+        <div class="contenedor-resumen">
             <h2 class="titulo-resumen">Resumen de la compra</h2>
 
             <div class="detalle-linea">
@@ -34,7 +33,7 @@
             
             <div class="detalle-linea">
                 <span class="etiqueta">Envío:</span>
-                <span class="valor"></span>
+                <span class="valor" id="resumen-envio-valor">$ 0.00</span>
             </div>
 
             <div class="detalle-total">
@@ -43,12 +42,74 @@
             </div>
 
             <div class="contenedor-boton">
-                <button class="boton-finalizar">Finalizar compra</button>
+                <button class="boton-finalizar" id="btn-finalizar">Finalizar compra</button>
+            </div>
+        </div> 
+    </div> 
+
+    <!-- Modal del proceso de compra -->
+    <div id="modal-compra" class="modal oculto">
+        <div class="overlay"></div>
+        <div class="modal-contenido">
+
+            <!-- Paso 1: Tipo de envío -->
+            <div class="paso" id="paso-envio">
+                <h2>Tipo de envío</h2>
+                <p>Selecciona un tipo de envío:</p>
+                <div class="opciones-envio">
+                    <label><input type="radio" name="tipo-envio" value="0.15"> Premium 2 a 5 días (15%)</label>
+                    <label><input type="radio" name="tipo-envio" value="0.07"> Express 5 a 8 días (7%)</label>
+                    <label><input type="radio" name="tipo-envio" value="0.05"> Standard 12 a 15 días (5%)</label>
+                </div>
+                <button class="btn-siguiente" data-next="direccion">Siguiente</button>
             </div>
 
-        </div> 
-        </div> 
-    <script src="cart.js"></script>
+            <!-- Paso 2: Dirección de envío -->
+            <div class="paso oculto" id="paso-direccion">
+                <h2>Dirección de envío</h2>
+                <div class="campos-direccion">
+                    <input type="text" placeholder="Departamento" id="departamento">
+                    <input type="text" placeholder="Localidad" id="localidad">
+                    <input type="text" placeholder="Calle" id="calle">
+                    <input type="text" placeholder="Número" id="numero">
+                    <input type="text" placeholder="Esquina" id="esquina">
+                </div>
+                <div class="botones-modal">
+                    <button class="btn-anterior" data-prev="envio">Anterior</button>
+                    <button class="btn-siguiente" data-next="pago">Siguiente</button>
+                </div>
+            </div>
 
+            <!-- Paso 3: Forma de pago -->
+            <div class="paso oculto" id="paso-pago">
+                <h2>Forma de pago</h2>
+                <div class="opciones-pago">
+                    <label><input type="radio" name="forma-pago" value="tarjeta"> Tarjeta de crédito</label>
+                    <label><input type="radio" name="forma-pago" value="transferencia"> Transferencia bancaria</label>
+                </div>
+                <div class="botones-modal">
+                    <button class="btn-anterior" data-prev="direccion">Anterior</button>
+                    <button class="btn-siguiente" data-next="costos">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Paso 4: Costos -->
+            <div class="paso oculto" id="paso-costos">
+                <h2>Resumen de costos</h2>
+                <div class="resumen-costos">
+                    <p>Subtotal: <span id="modal-subtotal">$0.00</span></p>
+                    <p>Envío: <span id="modal-envio">$0.00</span></p>
+                    <p><strong>Total: <span id="modal-total">$0.00</span></strong></p>
+                </div>
+                <div class="botones-modal">
+                    <button class="btn-anterior" data-prev="pago">Anterior</button>
+                    <button class="btn-finalizar">Finalizar compra</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
 </body>
 </html>
