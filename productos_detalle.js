@@ -1,3 +1,7 @@
+// Variables globales para almacenar los handlers de eventos
+let currentAddToCartHandler = null;
+let currentBuyNowHandler = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Obtener el ID del producto desde la URL (?id=123)
     const params = new URLSearchParams(window.location.search);
@@ -20,34 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --------------------
-// Cargar detalles del producto
+// Funciones de Handler para evitar duplicación
 // --------------------
-function loadProductDetails(productId) {
-    const PRODUCT_URL = PRODUCT_INFO_URL + productId + EXT_TYPE;
 
-    fetch(PRODUCT_URL)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al cargar la información del producto.');
-            }
-            return response.json();
-        })
-        .then(productData => {
-            // Mostrar información del producto
-            document.getElementById('product-name').textContent = productData.name;
-            document.getElementById('product-description').textContent = productData.description;
-            document.getElementById('product-price').textContent = `Precio: ${productData.currency} ${productData.cost}`;
-            document.getElementById('product-soldCount').textContent = `Vendidos: ${productData.soldCount}`;
-
-            // Cargar imágenes
-            loadProductImages(productData.images);
-
-           // --------------------
-// Botón "Añadir al carrito"
-// --------------------
-const addBtn = document.getElementById('add-to-cart-btn');
-if (addBtn) {
-    addBtn.addEventListener('click', function(e) {
+// Handler para el botón "Añadir al carrito"
+function createAddToCartHandler(productData) {
+    return function(e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -74,9 +56,8 @@ if (addBtn) {
             localStorage.setItem('cart', JSON.stringify(cart));
 
             // 2. Llamar a la función para actualizar el badge flotante
-
             if (window.updateCartBadge) {
-                window.updateCartBadge(); 
+                window.updateCartBadge();
             }
 
             // ✅ Mensaje de confirmación
@@ -85,50 +66,96 @@ if (addBtn) {
         } catch (error) {
             console.error('Error al agregar al carrito:', error);
         }
-    });
+    };
 }
 
+// Handler para el botón "Comprar ahora"
+function createBuyNowHandler(productData) {
+    return function(e) {
+        e.preventDefault();
+
+        try {
+            const productToBuy = {
+                id: productData.id,
+                name: productData.name,
+                unitCost: productData.cost,
+                currency: productData.currency,
+                count: 1,
+                image: productData.images[0]
+            };
+
+            // ✅ Recuperar carrito existente sin borrar
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const existing = cart.find(item => String(item.id) === String(productData.id));
+            if (existing) {
+                existing.count++;
+            } else {
+                cart.push(productToBuy);
+            }
+
+            // Guardar carrito actualizado
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Redirigir al carrito
+            window.location.href = './cart.html';
+
+        } catch (error) {
+            console.error('Error al procesar la compra:', error);
+        }
+    };
+}
+
+
+// --------------------
+// Cargar detalles del producto
+// --------------------
+function loadProductDetails(productId) {
+    const PRODUCT_URL = PRODUCT_INFO_URL + productId + EXT_TYPE;
+
+    fetch(PRODUCT_URL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar la información del producto.');
+            }
+            return response.json();
+        })
+        .then(productData => {
+            // Mostrar información del producto
+            document.getElementById('product-name').textContent = productData.name;
+            document.getElementById('product-description').textContent = productData.description;
+            document.getElementById('product-price').textContent = `Precio: ${productData.currency} ${productData.cost}`;
+            document.getElementById('product-soldCount').textContent = `Vendidos: ${productData.soldCount}`;
+
+            // Cargar imágenes
+            loadProductImages(productData.images);
+
             // --------------------
-            // Botón "Comprar ahora"
+            // Botón "Añadir al carrito" (IMPLEMENTACIÓN DE SOLUCIÓN)
+            // --------------------
+            const addBtn = document.getElementById('add-to-cart-btn');
+            if (addBtn) {
+                // Eliminar el listener anterior si existe
+                if (currentAddToCartHandler) {
+                    addBtn.removeEventListener('click', currentAddToCartHandler);
+                }
+                // Crear y asignar el nuevo listener
+                currentAddToCartHandler = createAddToCartHandler(productData);
+                addBtn.addEventListener('click', currentAddToCartHandler);
+            }
+
+            // --------------------
+            // Botón "Comprar ahora" (IMPLEMENTACIÓN DE SOLUCIÓN)
             // --------------------
             const buyBtn = document.getElementById('buy-now-btn');
             if (buyBtn) {
-                buyBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    try {
-                        const productToBuy = {
-                            id: productData.id,
-                            name: productData.name,
-                            unitCost: productData.cost,
-                            currency: productData.currency,
-                            count: 1,
-                            image: productData.images[0]
-                        };
-
-                        // ✅ Recuperar carrito existente sin borrar
-                        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-                        const existing = cart.find(item => String(item.id) === String(productData.id));
-                        if (existing) {
-                            existing.count++;
-                        } else {
-                            cart.push(productToBuy);
-                        }
-
-                        // Guardar carrito actualizado
-                        localStorage.setItem('cart', JSON.stringify(cart));
-
-                        // Guardar producto seleccionado
-                        localStorage.setItem('productToBuy', JSON.stringify(productToBuy));
-
-                        // Redirigir al carrito
-                        window.location.href = './cart.html';
-
-                    } catch (error) {
-                        console.error('Error al procesar la compra:', error);
-                    }
-                });
+                // Eliminar el listener anterior si existe
+                if (currentBuyNowHandler) {
+                    buyBtn.removeEventListener('click', currentBuyNowHandler);
+                }
+                // Crear y asignar el nuevo listener
+                currentBuyNowHandler = createBuyNowHandler(productData);
+                buyBtn.addEventListener('click', currentBuyNowHandler);
             }
 
             // Productos relacionados
@@ -224,6 +251,8 @@ function displayRelatedProducts(relatedProducts) {
                 `;
 
                 productDiv.addEventListener('click', () => {
+                    // Al hacer clic en un producto relacionado, cargamos los detalles
+                    // y limpiamos los listeners viejos dentro de loadProductDetails
                     loadProductDetails(product.id);
                     localStorage.setItem("productID", product.id);
                     loadComments(product.id);
@@ -253,7 +282,8 @@ function loadComments(productId) {
 function showComments(comments) {
     const container = document.getElementById("comments-container");
     if (container) {
-        container.innerHTML = "";
+        // Limpiar el contenedor antes de mostrar los nuevos comentarios
+        container.innerHTML = ""; 
         comments.forEach(c => {
             appendComment(c);
         });
