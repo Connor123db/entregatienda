@@ -182,6 +182,13 @@ function escapeHtml(str) {
 function openCheckoutModal() {
   // Evitar abrir si no existe el contenedor/productos
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+  // No permitir abrir checkout si el carrito está vacío
+  if (cart.length === 0) {
+    alert("❌ El carrito está vacío. Agrega productos antes de finalizar la compra.");
+    return;
+  }
+  
   if (!document.getElementById('productos-container')) return;
 
   // Crear overlay (fondo) y modal (contenido)
@@ -296,36 +303,67 @@ function openCheckoutModal() {
   }
 
   // next/prev botones (delegación)
-  modal.addEventListener('click', (ev) => {
-    if (ev.target.classList.contains('btn-checkout-next')) {
-      // si estamos en paso 0 (selección de envío) y no hay radio seleccionado, no avanzar
-      if (currentStepIndex === 0) {
-        const sel = modal.querySelector('input[name="checkout-envio"]:checked');
-        if (!sel) {
-          alert('Por favor selecciona un tipo de envío.');
-          return;
-        }
-        // aplicar selección en tiempo real
-        selectedShippingRate = parseFloat(sel.value);
-        // label
-        selectedShippingLabel = sel.parentElement.textContent.trim();
-        // actualizar resumen principal
-        updateResumen();
+ modal.addEventListener('click', (ev) => {
+  // ➤ BOTÓN SIGUIENTE
+  if (ev.target.classList.contains('btn-checkout-next')) {
+    // Validación del paso 1 → debe haber envío seleccionado
+    if (currentStepIndex === 0) {
+      const sel = modal.querySelector('input[name="checkout-envio"]:checked');
+      if (!sel) {
+        alert('❌ Por favor selecciona un tipo de envío.');
+        return;
       }
-      if (currentStepIndex < steps.length - 1) showStep(currentStepIndex + 1);
+      selectedShippingRate = parseFloat(sel.value);
+      selectedShippingLabel = sel.parentElement.textContent.trim();
+      updateResumen();
     }
+    if (currentStepIndex < steps.length - 1) {
+      showStep(currentStepIndex + 1);
+    }
+  }
+  // ➤ BOTÓN ANTERIOR
+  if (ev.target.classList.contains('btn-checkout-prev')) {
+    if (currentStepIndex > 0) {
+      showStep(currentStepIndex - 1);
+    }
+  }
+  // ➤ BOTÓN FINALIZAR COMPRA 
+  if (ev.target.classList.contains('btn-checkout-finish')) {
+    // VALIDACIÓN 1 — Dirección obligatoria
+    const dep = modal.querySelector('#ch-departamento').value.trim();
+    const loc = modal.querySelector('#ch-localidad').value.trim();
+    const calle = modal.querySelector('#ch-calle').value.trim();
+    const numero = modal.querySelector('#ch-numero').value.trim();
 
-    if (ev.target.classList.contains('btn-checkout-prev')) {
-      if (currentStepIndex > 0) showStep(currentStepIndex - 1);
+    if (!dep || !loc || !calle || !numero) {
+      alert("❌ Debes completar todos los campos obligatorios de la dirección.");
+      return;
     }
-
-    if (ev.target.classList.contains('btn-checkout-finish')) {
-      // aquí podrías validar dirección y forma de pago si querés
-      // por ahora: cerrar y mostrar mensaje
-      closeOverlay();
-      alert('✅ Compra finalizada.');
+    // VALIDACIÓN 2 — Forma de envío
+    if (!selectedShippingRate) {
+      alert("❌ Debes seleccionar un tipo de envío.");
+      return;
     }
-  });
+    // VALIDACIÓN 3 — Cantidades > 0
+    const inputsCant = document.querySelectorAll('.qty-input');
+    for (const inp of inputsCant) {
+      const v = Number(inp.value);
+      if (!v || v <= 0) {
+        alert("❌ La cantidad de todos los productos debe ser mayor a 0.");
+        return;
+      }
+    }
+    // VALIDACIÓN 4 — Forma de pago
+    const pagoSel = modal.querySelector('input[name="checkout-pago"]:checked');
+    if (!pagoSel) {
+      alert("❌ Debes seleccionar una forma de pago.");
+      return;
+    }
+    // SI TODO ESTÁ OK 
+    closeOverlay();
+    alert('✅ Compra finalizada con éxito.');
+  }
+});
 
   // Permitir cerrar con Escape o clic fuera del modal
   function onKey(e) {
