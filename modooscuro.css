@@ -97,3 +97,28 @@ body.dark-mode .rating-text {
   background-color: #ffd633;
   transform: scale(1.1);
 }
+/* =================== BOTÓN MODO OSCURO FIJO ABAJO DERECHA =================== */
+.modo-oscuro-btn {
+  position: fixed;          /* Fijo en pantalla */
+  bottom: 20px;             /* Separado del borde inferior */
+  right: 20px;              /* Separado del borde derecho */
+  background-color: #ffcc00;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  z-index: 2000;            /* Siempre visible encima de todo */
+}
+
+.modo-oscuro-btn:hover {
+  background-color: #ffd633;
+  transform: scale(1.1);
+}

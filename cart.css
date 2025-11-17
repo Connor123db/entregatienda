@@ -1,4 +1,4 @@
-/* Estilos para el carrito de compras */
+/* Estilos generales */
 body {
     background-color: #2c3e50;
     font-family: Arial, sans-serif;
@@ -16,7 +16,7 @@ body {
     width: 90%;
 }
 
-/* CARRITO DE COMPRAS */
+/* CARRITO */
 .contenedor-carrito {
     background-color: #fef3e2;
     flex: 2;
@@ -37,7 +37,6 @@ body {
 #productos-container {
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-height: 400px;
     overflow-y: auto;
     display: flex;
@@ -71,11 +70,6 @@ body {
     flex: 1;
 }
 
-.producto-info h3 {
-    margin: 0;
-    font-size: 16px;
-}
-
 .btn-remove {
     padding: 6px 10px;
     background: #f44336;
@@ -85,14 +79,6 @@ body {
     cursor: pointer;
 }
 .btn-remove:hover { opacity: 0.9; }
-
-.contenedor-envio {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    font-weight: bold;
-}
 
 /* RESUMEN */
 .contenedor-resumen {
@@ -105,10 +91,9 @@ body {
 
 .titulo-resumen {
     font-size: 20px;
-    text-align: left;
-    margin: 0 0 20px 0;
-    padding-bottom: 15px;
+    margin-bottom: 20px;
     border-bottom: 1px solid #556a7f;
+    padding-bottom: 15px;
 }
 
 .detalle-linea {
@@ -127,11 +112,6 @@ body {
     border-top: 2px solid #556a7f;
 }
 
-.contenedor-boton {
-    margin-top: 25px;
-    text-align: center;
-}
-
 .boton-finalizar {
     width: 100%;
     padding: 12px;
@@ -142,34 +122,16 @@ body {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: 0.2s;
 }
 .boton-finalizar:hover {
     background-color: #e6a11c;
 }
 
-@media (max-width: 800px) {
-    .contenedor-principal {
-        flex-direction: column;
-        width: 95%;
-    }
-    .producto-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .producto-item img {
-        width: 100%;
-        height: auto;
-    }
-}
-
 /* =============================== */
-/* NUEVO: MODAL DE COMPRA */
+/* MODAL */
 /* =============================== */
-
-.modal.oculto {
-    display: none;
-}
+.modal.oculto { display: none; }
 
 .modal {
     position: fixed;
@@ -192,51 +154,25 @@ body {
     width: 90%;
     max-width: 600px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transform: translateY(20px);
-    opacity: 0;
-    animation: slideUp 0.4s ease forwards;
+    animation: modalEnter 0.45s ease forwards;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-/* Paso */
 .paso {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.paso h2 {
-    text-align: center;
-    margin-top: 0;
-    font-size: 22px;
-}
-
-.opciones-envio,
-.opciones-pago {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 0;
-}
-
+/* Inputs */
 .campos-direccion input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #aaa;
     border-radius: 8px;
+    border: 1px solid #aaa;
     margin-bottom: 10px;
-    font-size: 14px;
 }
 
+/* Botones del modal */
 .botones-modal {
     display: flex;
     justify-content: space-between;
@@ -254,7 +190,7 @@ body {
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: 0.2s;
 }
 
 .btn-siguiente:hover,
@@ -264,34 +200,71 @@ body {
     transform: scale(1.05);
 }
 
-/* Resumen dentro del modal */
-.resumen-costos {
-    background: #fff9f0;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: left;
-    font-size: 16px;
-}
-
-.resumen-costos p {
-    margin: 6px 0;
-}
-
-/* =============================== */
-/* Animación de entrada suave al abrir modal */
-/* =============================== */
-
-.modal-contenido {
-    animation: modalEnter 0.45s ease forwards;
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes modalEnter {
-    from {
-        transform: translateY(30px);
-        opacity: 0;
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* =============================== */
+/* RESPONSIVE BREAKPOINTS */
+/* =============================== */
+
+/* Tablets */
+@media (max-width: 900px) {
+    .contenedor-principal {
+        flex-direction: column;
+        width: 95%;
     }
-    to {
-        transform: translateY(0);
-        opacity: 1;
+
+    .producto-item img {
+        width: 100px;
+        height: 80px;
+    }
+}
+
+/* Celulares grandes */
+@media (max-width: 600px) {
+    .producto-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .producto-item img {
+        width: 100%;
+        height: auto;
+    }
+
+    .btn-remove {
+        align-self: flex-end;
+    }
+
+    .modal-contenido {
+        padding: 20px;
+    }
+
+    .botones-modal {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Celulares pequeños */
+@media (max-width: 420px) {
+    .titulo-carrito {
+        font-size: 20px;
+    }
+
+    .titulo-resumen {
+        font-size: 18px;
+    }
+
+    .detalle-total {
+        font-size: 20px;
     }
 }

@@ -1,23 +1,29 @@
 /* =================== ESTILOS LOGIN =================== */
-body {
+html, body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden; /* Evita barras horizontales */
+}
+
+body {
   height: 100vh;
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center;     /* Centra verticalmente */
-  background-color: #f5eddc; /* Fondo beige suave */
+  justify-content: center; 
+  align-items: center;     
+  background-color: #f5eddc;
   font-family: Arial, sans-serif;
 }
 
 /* Contenedor principal */
 .login-container {
-  width: 380px;
+  width: 100%;
+  max-width: 380px; /* <-- evita desbordes */
   padding: 40px 30px;
-  background: #f9b22d; /* Amarillo anaranjado */
+  background: #f9b22d;
   border-radius: 16px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
   text-align: center;
+  box-sizing: border-box; /* importante para evitar que el padding rompa el layout */
 }
 
 /* Título */
@@ -30,9 +36,9 @@ body {
 
 /* Campos de entrada */
 .login-container input {
-  width: 90%;
+  width: 100%;
   height: 50px;
-  background: #37526c; /* Azul grisáceo */
+  background: #37526c;
   color: #fff;
   border: none;
   border-radius: 16px;
@@ -40,6 +46,7 @@ body {
   font-size: 18px;
   padding: 0 15px;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .login-container input::placeholder {
@@ -50,7 +57,7 @@ body {
 .login-container button {
   width: 100%;
   height: 50px;
-  background: #36320A; /* Marrón oscuro */
+  background: #36320A;
   color: #fff;
   border: none;
   border-radius: 30px;
@@ -62,7 +69,7 @@ body {
 }
 
 .login-container button:hover {
-  background: #37526c; /* Azul grisáceo al pasar el mouse */
+  background: #37526c;
   transform: scale(1.03);
 }
 
@@ -81,4 +88,65 @@ body {
 
 .login-container a:hover {
   text-decoration: underline;
+}
+
+/* =================== RESPONSIVE =================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 35px 25px;
+  }
+
+  .login-container h2 {
+    font-size: 28px;
+  }
+
+  .login-container input {
+    height: 48px;
+    font-size: 17px;
+  }
+
+  .login-container button {
+    height: 48px;
+    font-size: 20px;
+  }
+
+  .login-container p {
+    font-size: 14px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 480px) {
+  body {
+    height: auto; 
+    padding: 20px;
+    align-items: flex-start;
+  }
+
+  .login-container {
+    padding: 25px 20px;
+    border-radius: 12px;
+  }
+
+  .login-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .login-container input {
+    height: 45px;
+    font-size: 16px;
+  }
+
+  .login-container button {
+    height: 45px;
+    font-size: 18px;
+    border-radius: 25px;
+  }
+
+  .login-container p {
+    font-size: 13px;
+  }
 }

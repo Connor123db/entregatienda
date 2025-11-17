@@ -1,0 +1,218 @@
+/* =================== ESTILOS PERFIL USUARIO =================== */
+body {
+  background: #f9f1dc;
+  font-family: 'Raleway', sans-serif;
+  margin: 0;
+}
+
+/* --- Contenedor principal del perfil --- */
+.profile-container {
+  max-width: 400px;
+  margin: 100px auto 40px auto; /* Espacio arriba para la navbar fija */
+  background: #fff3e0;
+  border-radius: 20px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  padding: 32px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #bdbdbd;
+  object-fit: cover;
+  margin-bottom: 12px;
+  background: #fff;
+}
+
+.btn-edit-photo {
+  background: #f9b22d;
+  color: #333;
+  border: none;
+  border-radius: 14px;
+  padding: 8px 24px;
+  font-weight: 600;
+  font-size: 1.15em;
+  margin-bottom: 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-edit-photo:hover {
+  background: #e6a11c;
+}
+
+#profileForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#profileForm label {
+  background: #f9b22d;
+  color: #333;
+  font-weight: 700;
+  font-size: 0.95em;
+  border-radius: 8px;
+  padding: 4px 16px;
+  margin-bottom: 6px;
+  margin-top: 10px;
+  align-self: center;
+}
+
+.form-control {
+  width: 100%;
+  max-width: 260px;
+  background: #3c4a5b;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 16px;
+  font-size: 1em;
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1px;
+  box-sizing: border-box;
+}
+
+.form-control:read-only {
+  opacity: 0.7;
+}
+
+.btn-save {
+  background: #f9b22d;
+  color: #333;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 32px;
+  font-weight: 700;
+  font-size: 1.1em;
+  margin-top: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-save:hover {
+  background: #e6a11c;
+}
+
+/* =================== NAVBAR =================== */
+.navbar {
+  width: 100%;
+  background: #37526c;
+  color: #fef3e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  padding: 0 20px;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* Logo */
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #f9b22d;
+  text-decoration: none;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-links a,
+.logout-btn {
+  background: #f9b22d;
+  color: #333;
+  border-radius: 14px;
+  padding: 8px 18px;
+  font-weight: 600;
+  font-size: 1em;
+  text-decoration: none;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.nav-links a:hover,
+.logout-btn:hover,
+.nav-links a.active {
+  background: #e6a11c;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Mobile: activar menú hamburguesa */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: #f9b22d;
+  border-radius: 2px;
+}
+
+/* Estilos responsive */
+@media (max-width: 700px) {
+
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    background: #37526c;
+    flex-direction: column;
+    width: 180px;
+    padding: 15px 0;
+    gap: 10px;
+    display: none;
+    border-radius: 0 0 0 12px;
+  }
+
+  .nav-links a,
+  .logout-btn {
+    width: 140px;
+    text-align: center;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Ajustes generales responsive */
+@media (max-width: 600px) {
+  .profile-container {
+    max-width: 95vw;
+    padding: 18px 8px;
+  }
+
+  .form-control {
+    max-width: 90vw;
+  }
+}
